@@ -24,7 +24,7 @@ export default function Home() {
                     <div className={styles.infoContent}>
                         <div className={styles.infoText}>
                             <h3>Hi! I'm...</h3>
-                            <h2>Username</h2>
+                            <h2>{user_name}</h2>
                         </div>
                         <button className={styles.editButton}>Edit</button>
                     </div>
