@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '../styles/personal_info.module.css';
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Link from 'next/link';
 
 export default function Home() {
     const { user, error, isLoading } = useUser();
@@ -99,9 +100,9 @@ export default function Home() {
                 <div className={styles.usernameSection}>
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                 </div>
-                <button className={styles.sidebarButton}>Connection</button>
-                <button className={styles.sidebarButton}>Personal Info</button>
-                <button className={styles.sidebarButton}>Journal</button>
+                <Link href="/home" className={styles.sidebarButton}>Connection</Link>
+                <Link href="/personal_info" className={styles.sidebarButton}>Personal Info</Link>
+                <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
             </div>
             <div className={styles.content}>
                 <div className={styles.infoSection}>
