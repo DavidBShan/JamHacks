@@ -1,0 +1,67 @@
+.container {
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    background-color: #f0f0f0;
+    padding: 20px;
+    width: 200px;
+}
+
+.usernameSection {
+    background-color: #c689ff;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.sidebarButton {
+    background-color: #d4a0ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.journalEntry {
+    background-color: #e0b3ff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.newEntry {
+    background-color: #e0b3ff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.input,
+.textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.button {
+    background-color: #8000ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
