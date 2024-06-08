@@ -13,11 +13,16 @@
 
 .usernameSection {
     background-color: #c689ff;
-    padding: 10px;
     margin-bottom: 10px;
     text-align: center;
     color: white;
     font-weight: bold;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
 }
 
 .sidebarButton {
@@ -29,6 +34,7 @@
     width: 100%;
     text-align: left;
     cursor: pointer;
+    border-radius: 12px;
 }
 
 .content {
@@ -42,7 +48,6 @@
     background-color: #e0b3ff;
     margin-bottom: 20px;
     padding: 20px;
-    border-radius: 8px;
 }
 
 .newEntry {
