@@ -1,0 +1,88 @@
+/* home.module.css */
+.container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #f0f0f0;
+    padding: 20px;
+    width: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    /* Make the sidebar fixed */
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.usernameSection {
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #c689ff;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.usernameSection span {
+    flex-grow: 1;
+    /* This makes the username take up remaining space */
+}
+
+.profilePicture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.sidebarButton {
+    border-radius: 12px;
+    background-color: #d4a0ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sidebarButton:hover {
+    background-color: #b389ff;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 220px;
+    /* Ensure content doesn't go under the sidebar */
+    background-color: #ffffff;
+}
+
+.graphContainer {
+    margin-left: 12%;
+    border: 20px solid #f682b1;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.graphTitle {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
