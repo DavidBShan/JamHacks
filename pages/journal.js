@@ -17,10 +17,33 @@ export default function Home() {
             setJournalEntries([...journalEntries, { date: `${year}-${month}-${day}`, content }]);
             setNewEntry({ year: '', month: '', day: '', content: '' });
 
-            const res = await axios.post('/api/summarize', { prompt: "on "+year+"-"+month+"-"+day+ " " + content });
-            const jsonArray = res.data.data;
+            const res = await axios.post('/api/summarize', { prompt: "on " + year + "-" + month + "-" + day + " " + content });
+            const jsonString = res.data.data; // Assuming this is a JSON string
+            const jsonArray = JSON.parse(jsonString);
             console.log(jsonArray);
-            
+
+            const bob = 'Bob';
+
+            for (const { name, activity } of jsonArray) {
+                // Check if the node exists for the person
+                let nodeExists = await axios.post('/api/node-exist', { nodeName: name });
+                console.log(nodeExists);
+                if (!nodeExists.data.exists) {
+                    // Create the node if it doesn't exist
+                    await axios.post('/api/add-node', { nodeName: name });
+                }
+
+                // Check if the relationship exists between Bob and the person
+                let relationshipExists = await axios.post('/api/relationship-exist', { fromNodeName: bob, toNodeName: name });
+                console.log(relationshipExists);
+                if (!relationshipExists.data.exists) {
+                    // Create the relationship if it doesn't exist
+                    await axios.post('/api/add-relationships', { fromNodeName: bob, toNodeName: name, description: activity });
+                } else {
+                    // Edit the relationship if it exists
+                    await axios.post('/api/edit-relationships', { fromNodeName: bob, toNodeName: name, newDescription: activity });
+                }
+            }
         }
     };
 
