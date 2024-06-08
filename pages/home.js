@@ -80,22 +80,25 @@ export default function Home() {
     const user_picture = user ? user.picture : "/default-profile.png"; // Fallback to a default profile picture
 
     return (
-        <div className="container mx-auto p-4">
-            <div className={styles.container}>
-                <div className={styles.sidebar}>
-                    <div className={styles.usernameSection}>
-                        <span>{user_name}</span>
-                        <img src={user_picture} alt="Profile" className={styles.profilePicture} />
-                    </div>
-                    <Link href = "/home" className={styles.sidebarButton}>Connection</Link>
-                    <Link href = "/personal_info" className={styles.sidebarButton}>Personal Info</Link>
-                    <Link href = "journal" className={styles.sidebarButton}>Journal</Link>
+        
+        <div className={styles.container}>
+            <div className={styles.sidebar}>
+                <div className={styles.logoSection}>
+
                 </div>
-                <div className={styles.graphContainer}>
-                    <h2 className={styles.graphTitle}>Graph View</h2>
-                    <Graph data={graphData} onNodeClick={handleNodeClick} onEdgeClick={handleEdgeClick} />
+                <div className={styles.usernameSection}>
+                    <span>{user_name}</span>
+                    <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                 </div>
+                <button className={styles.sidebarButton}>Connection</button>
+                <button className={styles.sidebarButton}>Personal Info</button>
+                <button className={styles.sidebarButton}>Journal</button>
+            </div>
+            <div className={styles.graphContainer}>
+                <h2 className={styles.graphTitle}>Graph View</h2>
+                <Graph data={graphData} onNodeClick={handleNodeClick} onEdgeClick={handleEdgeClick} />
             </div>
         </div>
+        
     );
 }

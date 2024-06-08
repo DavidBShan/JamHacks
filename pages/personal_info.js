@@ -27,10 +27,12 @@ export default function Home() {
     const checkAndAddNode = async (userName) => {
         try {
             const nodeExists = await axios.post('/api/node-exist', { nodeName: userName });
+            console.log(nodeExists.data.nodeExists);
             if (!nodeExists.data.nodeExists) {
                 await axios.post('/api/add-node', { nodeName: userName });
             } else {
                 const nodeData = await axios.post('/api/get-node-data', { nodeName: userName });
+                console.log(nodeData.data);
                 const data = nodeData.data;
                 setAddress(data.address);
                 setEmergencyContact({
@@ -52,6 +54,8 @@ export default function Home() {
     const handleSaveAddressClick = async () => {
         setIsEditingAddress(false);
         try {
+            console.log('Updating address:', address)
+            console.log('User name:', user_name)
             await axios.post('/api/edit-node', {
                 nodeName: user_name,
                 address: address,
@@ -72,6 +76,7 @@ export default function Home() {
     const handleSaveEmergencyContactClick = async () => {
         setIsEditingEmergencyContact(false);
         try {
+            console.log("Updating emergency contact:", emergencyContact);
             await axios.post('/api/edit-node', {
                 nodeName: user_name,
                 address: address,
@@ -92,14 +97,12 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <div className={styles.sidebar}>
-                <div className={styles.logoSection}></div>
                 <div className={styles.usernameSection}>
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
-                    <h1>{user_name}</h1>
                 </div>
-                <Link href = "/home" className={styles.sidebarButton}>Connection</Link>
-                <Link href = "/personal_info" className={styles.sidebarButton}>Personal Info</Link>
-                <Link href = "journal" className={styles.sidebarButton}>Journal</Link>
+                <Link href="/home" className={styles.sidebarButton}>Connection</Link>
+                <Link href="/personal_info" className={styles.sidebarButton}>Personal Info</Link>
+                <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
             </div>
             <div className={styles.content}>
                 <div className={styles.infoSection}>
