@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Home() {
     const [journalEntries, setJournalEntries] = useState([
-        { date: '2024-06-04', title: 'First day of journaling', content: 'SWAP WITH CONTENT' }
+        { date: '2024-06-04', title: 'First day of journaling', content: 'Example of a journal entry you could write!' }
     ]);
     const [newEntry, setNewEntry] = useState({ year: '', month: '', day: '', content: '' });
 
