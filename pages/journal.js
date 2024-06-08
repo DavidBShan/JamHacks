@@ -59,8 +59,9 @@ export default function Home() {
             <div className={styles.sidebar}>
                 <div className={styles.logoSection}></div>
                 <div className={styles.usernameSection}>
-                    {userName}
+                    
                     <img src={userPicture} alt="Profile" className={styles.profilePicture} />
+                    {userName}
                 </div>
                 <Link href = "/home" className={styles.sidebarButton}>Connection</Link>
                 <Link href = "/personal_info" className={styles.sidebarButton}>Personal Info</Link>

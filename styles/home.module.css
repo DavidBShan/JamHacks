@@ -64,7 +64,7 @@
 
 .graphContainer {
     margin-left: 0%;
-    background-image: url('/pictures/graphPic.png');
+    background-image: url('/pictures/stars.jpg');
     border: 20px solid #b19a6c;
     border-radius: 12px;
     padding: 20px;
@@ -79,6 +79,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+    color: whitesmoke
 }
 
 .logoSection {
@@ -100,6 +101,7 @@
     color: white;
     font-weight: bold;
 }
+
 
 .profilePicture {
     width: 50px; /* Adjust as needed */
