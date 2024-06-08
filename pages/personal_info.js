@@ -43,7 +43,6 @@ export default function Home() {
         <div className={styles.container}>
             <div className={styles.sidebar}>
                 <div className={styles.usernameSection}>
-                    {user_name}
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                 </div>
                 <button className={styles.sidebarButton}>Connection</button>
