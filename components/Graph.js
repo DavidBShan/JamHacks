@@ -16,8 +16,9 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
             id: `${rel.from}-${rel.to}`,
             from: rel.from,
             to: rel.to,
-            label: rel.type
+            label: `${rel.from}-${rel.to}`
         })));
+        // rel.type is descripiton
         const networkData = { nodes, edges };
         const options = {
             nodes: {
