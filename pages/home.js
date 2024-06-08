@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Graph from '../components/Graph';
 import axios from 'axios';
+import styles from '../styles/home.module.css';
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Home() {
     const [graphData, setGraphData] = useState({ nodes: [], relationships: [] });
@@ -78,10 +80,27 @@ export default function Home() {
         console.log('Edge clicked:', jsonString);
     };
 
+    const { user, error, isLoading } = useUser();
+    const user_name = user ? user.name : "Guest"; // Fallback to "Guest" if user is not defined
+    const user_picture = user ? user.picture : "/default-profile.png"; // Fallback to a default profile picture
+
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4">AuraDB Graph Visualization</h1>
-            <Graph data={graphData} onNodeClick={handleNodeClick} onEdgeClick={handleEdgeClick} />
+            <div className={styles.container}>
+                <div className={styles.sidebar}>
+                    <div className={styles.usernameSection}>
+                        <span>{user_name}</span>
+                        <img src={user_picture} alt="Profile" className={styles.profilePicture} />
+                    </div>
+                    <button className={styles.sidebarButton}>Connection</button>
+                    <button className={styles.sidebarButton}>Personal Info</button>
+                    <button className={styles.sidebarButton}>Journal</button>
+                </div>
+                <div className={styles.graphContainer}>
+                    <h2 className={styles.graphTitle}>Graph View</h2>
+                    <Graph data={graphData} onNodeClick={handleNodeClick} onEdgeClick={handleEdgeClick} />
+                </div>
+            </div>
         </div>
     );
 }
