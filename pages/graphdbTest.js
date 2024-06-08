@@ -1,53 +1,58 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-function EditRelationshipDescriptionForm() {
-    const [formData, setFormData] = useState({
-        fromNodeName: '',
-        toNodeName: '',
-        newDescription: ''
-    });
-    const [response, setResponse] = useState('');
+export default function GetEdgeDescription() {
+    const [fromName, setFrom] = useState('');
+    const [toName, setTo] = useState('');
+    const [description, setDescription] = useState(null);
+    const [error, setError] = useState(null);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setDescription(null);
+        setError(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
         try {
-            const res = await axios.put('/api/edit-relationships', formData);
-            setResponse(res.data.message);
-        } catch (error) {
-            setResponse(error.response ? error.response.data.error : error.message);
+            const response = await axios.post('/api/get-edge-description', { fromName, toName });
+            const data = response.data;
+            setDescription(data.description);
+        } catch (err) {
+            if (err.response) {
+                setError(err.response.data.error);
+            } else {
+                setError('An unexpected error occurred');
+            }
         }
     };
 
     return (
         <div>
-            <h2>Edit Relationship Description</h2>
+            <h1>Get Edge Description</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>From Node Name:</label>
-                    <input type="text" name="fromNodeName" value={formData.fromNodeName} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>To Node Name:</label>
-                    <input type="text" name="toNodeName" value={formData.toNodeName} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>New Description:</label>
-                    <input type="text" name="newDescription" value={formData.newDescription} onChange={handleChange} />
-                </div>
-                <button type="submit">Edit Relationship Description</button>
+                <label>
+                    From Node:
+                    <input
+                        type="text"
+                        value={fromName}
+                        onChange={(e) => setFrom(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    To Node:
+                    <input
+                        type="text"
+                        value={toName}
+                        onChange={(e) => setTo(e.target.value)}
+                        required
+                    />
+                </label>
+                <button type="submit">Get Description</button>
             </form>
-            {response && <p>{response}</p>}
+            {description !== null && (
+                <p>Description: {description}</p>
+            )}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 }
-
-export default EditRelationshipDescriptionForm;

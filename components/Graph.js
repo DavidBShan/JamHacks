@@ -8,7 +8,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         if (!data || !data.nodes || !data.relationships) {
             return;
         }
-
+        //console.log(data);
         // Initialize datasets for nodes and edges
         const nodeMap = {}; // Map to store node name to ID mapping
         const nodes = new DataSet(data.nodes.map((node, index) => {
@@ -18,7 +18,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         }));
 
         const edges = new DataSet(data.relationships.map((rel, index) => ({
-            id: `edge_${index}`, // Use index as a unique identifier for edges
+            id: `${rel.from}-${rel.to}`, // Use index as a unique identifier for edges
             from: nodeMap[rel.from], // Retrieve ID of 'from' node from the mapping
             to: nodeMap[rel.to], // Retrieve ID of 'to' node from the mapping
             label: `${rel.from}-${rel.to}`
@@ -27,10 +27,14 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         const networkData = { nodes, edges };
         const options = {
             nodes: {
-                color: {
-                    background: '#ff0000', // Red background color for nodes
-                    border: '#000000' // Black border color for nodes
-                }
+                shape: "icon",
+                icon: {
+                    face: "'Font Awesome 5 Free'",
+                    weight: "bold", // Font Awesome 5 doesn't work properly unless bold.
+                    code: "\uf1ad",
+                    size: 50,
+                    color: "#f0a30a",
+                },
             },
             edges: {
                 color: '#00ff00' // Green color for edges
@@ -55,7 +59,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         };
     }, [data, onNodeClick, onEdgeClick]);
 
-    return <div ref={container} style={{ height: '500px' }} />;
+    return <div ref={container} style={{ height: '700px' }} />;
 };
 
 export default Graph;
