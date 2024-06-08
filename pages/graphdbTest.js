@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function CreateRelationshipForm() {
+function EditRelationshipDescriptionForm() {
     const [formData, setFormData] = useState({
         fromNodeName: '',
         toNodeName: '',
-        description: ''
+        newDescription: ''
     });
     const [response, setResponse] = useState('');
 
@@ -20,7 +20,7 @@ function CreateRelationshipForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/api/add-relationships', formData);
+            const res = await axios.put('/api/edit-relationships', formData);
             setResponse(res.data.message);
         } catch (error) {
             setResponse(error.response ? error.response.data.error : error.message);
@@ -29,7 +29,7 @@ function CreateRelationshipForm() {
 
     return (
         <div>
-            <h2>Create Relationship</h2>
+            <h2>Edit Relationship Description</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>From Node Name:</label>
@@ -40,14 +40,14 @@ function CreateRelationshipForm() {
                     <input type="text" name="toNodeName" value={formData.toNodeName} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>Description:</label>
-                    <input type="text" name="description" value={formData.description} onChange={handleChange} />
+                    <label>New Description:</label>
+                    <input type="text" name="newDescription" value={formData.newDescription} onChange={handleChange} />
                 </div>
-                <button type="submit">Create Relationship</button>
+                <button type="submit">Edit Relationship Description</button>
             </form>
             {response && <p>{response}</p>}
         </div>
     );
 }
 
-export default CreateRelationshipForm;
+export default EditRelationshipDescriptionForm;

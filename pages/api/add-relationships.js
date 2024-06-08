@@ -14,13 +14,15 @@ export default async function handler(req, res) {
             throw new Error('Missing required fields: fromNodeName, toNodeName, description');
         }
 
-        // Create relationship between nodes based on their names
+        // Create mutual relationships between nodes based on their names
         await session.run(
-            'MATCH (fromNode {name: $fromNodeName}), (toNode {name: $toNodeName}) CREATE (fromNode)-[:FRIENDS_WITH {description: $description}]->(toNode)',
+            'MATCH (fromNode {name: $fromNodeName}), (toNode {name: $toNodeName}) ' +
+            'CREATE (fromNode)-[:FRIENDS_WITH {description: $description}]->(toNode), ' +
+            '(toNode)-[:FRIENDS_WITH {description: $description}]->(fromNode)',
             { fromNodeName, toNodeName, description }
         );
 
-        res.status(200).json({ message: 'Relationship created successfully' });
+        res.status(200).json({ message: 'Mutual relationships created successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     } finally {
