@@ -5,11 +5,12 @@
 }
 
 .sidebar {
-
     background-color: #f0f0f0;
     padding: 20px;
     width: 200px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .usernameSection {
@@ -19,25 +20,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-}
-
-.usernameSection span {
-
-    flex-grow: 1;
-}
-
-.profilePicture {
-
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-left: 10px;
-}
-
-.usernameSection {
-
     background-color: #c689ff;
-    padding: 10px;
     margin-bottom: 10px;
     text-align: center;
     color: white;
@@ -61,48 +44,34 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    gap: 20px; /* Adds space between info sections */
 }
 
-.journalEntry {
-    background-color: #e0b3ff;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.newEntry {
-    background-color: #e0b3ff;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: auto;
-}
-
-.input,
-.textarea {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.button {
-    background-color: #8000ff;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.content {
-    padding: 20px;
+.infoSection {
     background-color: #c689ff; 
-    width: calc(100% - 240px); 
-    height: 200px; 
-    margin-left: 20px; 
-    margin-right: 20px;
-    margin-top: 20px;
-    border-radius: 8px; 
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.infoContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.infoText {
+    color: white;
+}
+
+.editButton {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
 }
