@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import styles from '../styles/Home.module.css';
+import axios from 'axios';
 
 export default function Home() {
-    const [journalEntries, setJournalEntries] = useState([
-        { date: '2024-06-04', content: 'SWAP WITH CONTENT' }
-    ]);
+    const [journalEntries, setJournalEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({ year: '', month: '', day: '', content: '' });
 
     const handleInputChange = (e) => {
@@ -12,11 +11,16 @@ export default function Home() {
         setNewEntry({ ...newEntry, [name]: value });
     };
 
-    const handleCreateEntry = () => {
+    const handleCreateEntry = async () => {
         const { year, month, day, content } = newEntry;
         if (year && month && day && content) {
             setJournalEntries([...journalEntries, { date: `${year}-${month}-${day}`, content }]);
             setNewEntry({ year: '', month: '', day: '', content: '' });
+
+            const res = await axios.post('/api/summarize', { prompt: "on "+year+"-"+month+"-"+day+ " " + content });
+            const jsonArray = res.data.data;
+            console.log(jsonArray);
+            
         }
     };
 
