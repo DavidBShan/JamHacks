@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from '../styles/journal.module.css';
 import axios from 'axios';
 import Link from 'next/link'
-// import playSound from "play-sound";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Home() {
     const [currentPage, setCurrentPage] = useState('journal');
