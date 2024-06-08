@@ -42,9 +42,10 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <div className={styles.sidebar}>
+                <div className={styles.logoSection}></div>
                 <div className={styles.usernameSection}>
-
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
+                    <h1>{user_name}</h1>
                 </div>
                 <button className={styles.sidebarButton}>Connection</button>
                 <button className={styles.sidebarButton}>Personal Info</button>
