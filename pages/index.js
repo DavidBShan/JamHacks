@@ -11,19 +11,36 @@ export default function Home() {
                 if (!Array.isArray(data)) {
                     throw new Error('Data is not an array');
                 }
-    
+
+                const nodes = [];
+                const relationships = [];
+                data.forEach(d => {
+                    // Extract nodes
+                    d.nodes.forEach(node => {
+                        nodes.push(node);
+                    });
+
+                    // Extract relationships (if present)
+                    if (d.relationship) {
+                        relationships.push({
+                            from: d.nodes[0].name,
+                            to: d.nodes[1] ? d.nodes[1].name : null, // Check if the second node exists
+                            type: d.relationship.description || null // Check if the relationship exists
+                        });
+                    }
+                });
+
                 setGraphData({
-                    nodes: data.flatMap(d => d.nodes),
-                    relationships: data.map(d => ({ from: d.nodes[0].name, to: d.nodes[1].name, type: d.relationship.description }))
+                    nodes: nodes,
+                    relationships: relationships
                 });
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-    
+
         fetchData();
     }, []);
-    
 
     const handleNodeClick = (nodeId) => {
         console.log('Node clicked:', nodeId);
