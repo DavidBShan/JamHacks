@@ -1,10 +1,10 @@
 import { getSession } from '../../lib/neo4j';
 
 export default async function handler(req, res) {
-    let session; // Define session variable
+    let session; 
 
     try {
-        session = getSession(); // Open a new session
+        session = getSession(); 
         const result = await session.run('MATCH (n)-[r]->(m) RETURN n, r, m, type(r) as rel_type LIMIT 100');
         const records = result.records.map(record => {
             return {

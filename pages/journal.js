@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Home() {
     const [journalEntries, setJournalEntries] = useState([
-        { date: '2024-06-04', title: 'First day of journaling', content: 'SWAP WITH CONTENT' }
+        { date: '2024-06-04', content: 'SWAP WITH CONTENT' }
     ]);
     const [newEntry, setNewEntry] = useState({ year: '', month: '', day: '', content: '' });
 
@@ -15,7 +15,7 @@ export default function Home() {
     const handleCreateEntry = () => {
         const { year, month, day, content } = newEntry;
         if (year && month && day && content) {
-            setJournalEntries([...journalEntries, { date: `${year}-${month}-${day}`, title: 'New Entry', content }]);
+            setJournalEntries([...journalEntries, { date: `${year}-${month}-${day}`, content }]);
             setNewEntry({ year: '', month: '', day: '', content: '' });
         }
     };
@@ -32,9 +32,7 @@ export default function Home() {
                 {journalEntries.map((entry, index) => (
                     <div className={styles.journalEntry} key={index}>
                         <h2>{entry.date}</h2>
-                        <h3>{entry.title}</h3>
                         <p>{entry.content}</p>
-                        <button>Edit</button>
                     </div>
                 ))}
                 <div className={styles.newEntry}>
@@ -62,7 +60,7 @@ export default function Home() {
                     />
                     <textarea
                         name="content"
-                        placeholder="SWAP WITH CONTENT"
+                        placeholder="Journal Here"
                         value={newEntry.content}
                         onChange={handleInputChange}
                     />
