@@ -37,6 +37,9 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
                     size: 50,
                     color: "#f0a30a",
                 },
+                font: {
+                    color: 'white' // Set the label color to white
+                }
             },
             edges: {
                 color: '#00ff00' // Green color for edges
