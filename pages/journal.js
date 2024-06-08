@@ -1,10 +1,10 @@
 import { useState } from 'react';
+
 import styles from '../styles/journal.module.css';
+import axios from 'axios';
 
 export default function Home() {
-    const [journalEntries, setJournalEntries] = useState([
-        { date: '2024-06-04', title: 'First day of journaling', content: 'Example of a journal entry you could write!' }
-    ]);
+    const [journalEntries, setJournalEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({ year: '', month: '', day: '', content: '' });
 
     const handleInputChange = (e) => {
@@ -12,11 +12,16 @@ export default function Home() {
         setNewEntry({ ...newEntry, [name]: value });
     };
 
-    const handleCreateEntry = () => {
+    const handleCreateEntry = async () => {
         const { year, month, day, content } = newEntry;
         if (year && month && day && content) {
-            setJournalEntries([...journalEntries, { date: `${year}-${month}-${day}`, title: 'New Entry', content }]);
+            setJournalEntries([...journalEntries, { date: `${year}-${month}-${day}`, content }]);
             setNewEntry({ year: '', month: '', day: '', content: '' });
+
+            const res = await axios.post('/api/summarize', { prompt: "on "+year+"-"+month+"-"+day+ " " + content });
+            const jsonArray = res.data.data;
+            console.log(jsonArray);
+            
         }
     };
 
@@ -32,7 +37,6 @@ export default function Home() {
                 {journalEntries.map((entry, index) => (
                     <div className={styles.journalEntry} key={index}>
                         <h2>{entry.date}</h2>
-                        <h3>{entry.title}</h3>
                         <p>{entry.content}</p>
                     </div>
                 ))}
@@ -61,7 +65,7 @@ export default function Home() {
                     />
                     <textarea
                         name="content"
-                        placeholder=" Enter Text Here"
+                        placeholder="Journal Here"
                         value={newEntry.content}
                         onChange={handleInputChange}
                     />
