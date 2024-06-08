@@ -8,7 +8,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         if (!data || !data.nodes || !data.relationships) {
             return;
         }
-
+        //console.log(data);
         // Initialize datasets for nodes and edges
         const nodeMap = {}; // Map to store node name to ID mapping
         const nodes = new DataSet(data.nodes.map((node, index) => {
@@ -18,7 +18,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         }));
 
         const edges = new DataSet(data.relationships.map((rel, index) => ({
-            id: `edge_${index}`, // Use index as a unique identifier for edges
+            id: `${rel.from}-${rel.to}`, // Use index as a unique identifier for edges
             from: nodeMap[rel.from], // Retrieve ID of 'from' node from the mapping
             to: nodeMap[rel.to], // Retrieve ID of 'to' node from the mapping
             label: `${rel.from}-${rel.to}`

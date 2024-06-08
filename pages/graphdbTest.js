@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-export default function CheckNode() {
-    const [nodeName, setNodeName] = useState('');
-    const [nodeExists, setNodeExists] = useState(null);
+export default function GetEdgeDescription() {
+    const [fromName, setFrom] = useState('');
+    const [toName, setTo] = useState('');
+    const [description, setDescription] = useState(null);
     const [error, setError] = useState(null);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setNodeExists(null);
+        setDescription(null);
         setError(null);
 
         try {
-            const response = await axios.post('/api/node-exist', { nodeName });
+            const response = await axios.post('/api/get-edge-description', { fromName, toName });
             const data = response.data;
-            setNodeExists(data.nodeExists);
+            setDescription(data.description);
         } catch (err) {
             if (err.response) {
                 setError(err.response.data.error);
@@ -26,21 +27,30 @@ export default function CheckNode() {
 
     return (
         <div>
-            <h1>Check if Node Exists</h1>
+            <h1>Get Edge Description</h1>
             <form onSubmit={handleSubmit}>
                 <label>
-                    Node Name:
+                    From Node:
                     <input
                         type="text"
-                        value={nodeName}
-                        onChange={(e) => setNodeName(e.target.value)}
+                        value={fromName}
+                        onChange={(e) => setFrom(e.target.value)}
                         required
                     />
                 </label>
-                <button type="submit">Check</button>
+                <label>
+                    To Node:
+                    <input
+                        type="text"
+                        value={toName}
+                        onChange={(e) => setTo(e.target.value)}
+                        required
+                    />
+                </label>
+                <button type="submit">Get Description</button>
             </form>
-            {nodeExists !== null && (
-                <p>Node {nodeExists ? 'exists' : 'does not exist'}.</p>
+            {description !== null && (
+                <p>Description: {description}</p>
             )}
             {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>

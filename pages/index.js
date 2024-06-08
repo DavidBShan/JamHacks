@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Graph from '../components/Graph';
+import axios from 'axios';
 
 export default function Home() {
     const [graphData, setGraphData] = useState({ nodes: [], relationships: [] });
@@ -11,25 +12,26 @@ export default function Home() {
                 if (!Array.isArray(data)) {
                     throw new Error('Data is not an array');
                 }
-
+                console.log(data)
                 const nodes = [];
                 const relationships = [];
                 data.forEach(d => {
-                    // Extract nodes
                     d.nodes.forEach(node => {
-                        nodes.push(node);
+                        d.nodes.forEach(node => {
+                            if (!nodes.some(existingNode => existingNode.name === node.name)) {
+                                nodes.push(node);
+                            }
+                        });
                     });
-
-                    // Extract relationships (if present)
                     if (d.relationship) {
                         relationships.push({
                             from: d.nodes[0].name,
-                            to: d.nodes[1] ? d.nodes[1].name : null, // Check if the second node exists
-                            type: d.relationship.description || null // Check if the relationship exists
+                            to: d.nodes[1] ? d.nodes[1].name : null, 
+                            type: d.relationship.description || null 
                         });
                     }
                 });
-
+                console.log(nodes, relationships)
                 setGraphData({
                     nodes: nodes,
                     relationships: relationships
@@ -46,8 +48,17 @@ export default function Home() {
         console.log('Node clicked:', nodeId);
     };
 
-    const handleEdgeClick = (edgeId) => {
-        console.log('Edge clicked:', edgeId);
+    const handleEdgeClick = async (edgeId) => {
+        const [fromName, toName] = edgeId.split('-');
+        const response = await axios.post('/api/get-edge-description', { fromName, toName });
+        const data = response.data;
+        var sendName = fromName;
+        if (fromName == "David Shan"){
+            sendName = toName;
+        }
+        const res = await axios.post('/api/describe', { prompt: data, name: sendName });
+        const jsonString = res.data.data;
+        console.log('Edge clicked:', jsonString);
     };
 
     return (

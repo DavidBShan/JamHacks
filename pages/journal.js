@@ -24,9 +24,9 @@ export default function Home() {
                 const jsonString = res.data.data; // Assuming this is a JSON string
                 const jsonArray = JSON.parse(jsonString); // Convert JSON string to array
 
-                const bob = 'Bob';
+                const bob = 'David Shan';
 
-                for (const { name, activity } of jsonArray) {
+                for (const { name, description } of jsonArray) {
                     // Check if the node exists for the person
                     const nodeExists = await axios.post('/api/node-exist', { nodeName: name });
                     if (!nodeExists.data.exists) {
@@ -38,10 +38,10 @@ export default function Home() {
                     const relationshipExists = await axios.post('/api/relationship-exist', { fromNodeName: bob, toNodeName: name });
                     if (!relationshipExists.data.exists) {
                         // Create the relationship if it doesn't exist
-                        await axios.post('/api/add-relationships', { fromNodeName: bob, toNodeName: name, description: activity });
+                        await axios.post('/api/add-relationships', { fromNodeName: bob, toNodeName: name, description: description });
                     } else {
                         // Edit the relationship if it exists
-                        await axios.post('/api/edit-relationships', { fromNodeName: bob, toNodeName: name, newDescription: activity });
+                        await axios.post('/api/edit-relationships', { fromNodeName: bob, toNodeName: name, newDescription: description });
                     }
                 }
             } catch (error) {
