@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/journal.module.css';
 
 export default function Home() {
     const [journalEntries, setJournalEntries] = useState([
