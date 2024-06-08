@@ -23,8 +23,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         const edges = new DataSet(data.relationships.map((rel) => ({
             id: `${rel.from}-${rel.to}`, // Use from-to as a unique identifier for edges
             from: nodeMap[rel.from], // Retrieve ID of 'from' node from the mapping
-            to: nodeMap[rel.to], // Retrieve ID of 'to' node from the mapping
-            label: `${rel.from}-${rel.to}`
+            to: nodeMap[rel.to]
         })));
 
         const networkData = { nodes, edges };
