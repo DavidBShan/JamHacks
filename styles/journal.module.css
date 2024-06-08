@@ -78,18 +78,59 @@
 }
 
 .journalEntryDate {
+    font-size: 1.2rem;
     font-weight: bold;
-    font-size: 20px;
 }
 
+.journalContent {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 
+/* Add basic styles for common HTML elements */
+.journalContent h1,
+.journalContent h2,
+.journalContent h3,
+.journalContent h4,
+.journalContent h5,
+.journalContent h6 {
+    margin: 0.5em 0;
+}
+
+.journalContent p {
+    margin: 0.5em 0;
+}
+
+.journalContent h1 {
+    font-size: 2em;
+}
+
+.journalContent h2 {
+    font-size: 1.75em;
+}
+
+.journalContent h3 {
+    font-size: 1.5em;
+}
+
+.journalContent h4 {
+    font-size: 1.25em;
+}
+
+.journalContent h5 {
+    font-size: 1em;
+}
+
+.journalContent h6 {
+    font-size: 0.875em;
+}
 
 .newEntryContainer {
     background-color: #c689ff;
+    border-radius: 20px;
     padding: 20px;
     margin-top: auto;
-    border-radius: 20px;
-    /* Push the new entry section to the bottom */
+
 }
 
 
