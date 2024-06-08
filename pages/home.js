@@ -87,7 +87,6 @@ export default function Home() {
 
                 </div>
                 <div className={styles.usernameSection}>
-                    
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                     <span>{user_name}</span>
                 </div>
