@@ -5,8 +5,6 @@
         try {
             session = getSession();
             const { nodeName, address, emergencyName, emergencyPhone, emergencyEmail, emergencyHome } = req.body;
-            console.log(nodeName);
-            console.log(address);
             if (!nodeName) {
                 throw new Error('Node name is missing in the request body.');
             }

@@ -1,13 +1,13 @@
-import {getDescriptorResponse} from '../../lib/openai';
+import {imagizer} from '../../lib/openai';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
-            const { prompt, name } = req.body;
-            const response = await getDescriptorResponse("Name: " + name + " " + prompt.description);
-            const data = response.data[0]?.content[0]?.text?.value;
+            const { prompt } = req.body;
+            const response = await imagizer(prompt);
+            const data = response;
             if (!data) {
-                throw new Error("Unable to retrieve described text");
+                throw new Error("Unable to retrieve summarized text");
             }
             res.status(200).json({ data });
         } catch (error) {

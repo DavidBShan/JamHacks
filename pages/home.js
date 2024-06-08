@@ -16,7 +16,6 @@ export default function Home() {
                 if (!Array.isArray(data)) {
                     throw new Error('Data is not an array');
                 }
-                console.log(data)
                 const nodes = [];
                 const relationships = [];
                 data.forEach(d => {
@@ -33,7 +32,6 @@ export default function Home() {
                         });
                     }
                 });
-                console.log(nodes, relationships)
                 setGraphData({
                     nodes: nodes,
                     relationships: relationships
@@ -47,7 +45,6 @@ export default function Home() {
     }, []);
 
     const handleNodeClick = (nodeId) => {
-        console.log('Node clicked:', nodeId);
     };
 
     const handleEdgeClick = async (edgeId) => {
@@ -61,7 +58,6 @@ export default function Home() {
         const res = await axios.post('/api/describe', { prompt: data, name: sendName });
         const jsonString = res.data.data;
         const buffer = await axios.post('/api/speak', { prompt: jsonString });
-        console.log(buffer.data.response.data);
         
         // Convert ArrayBuffer to Uint8Array
         const audioData = new Uint8Array(buffer.data.response.data);
@@ -77,8 +73,6 @@ export default function Home() {
 
         // Play the audio
         audio.play();
-
-        console.log('Edge clicked:', jsonString);
     };
 
     const { user, error, isLoading } = useUser();

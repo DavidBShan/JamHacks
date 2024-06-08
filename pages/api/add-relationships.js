@@ -8,7 +8,6 @@ export default async function handler(req, res) {
 
         // Extract necessary data from request body
         const { fromNodeName, toNodeName, description } = req.body;
-        console.log(fromNodeName, toNodeName, description)
         // Check if all required fields are present
         if (!fromNodeName || !toNodeName || !description) {
             throw new Error('Missing required fields: fromNodeName, toNodeName, description');

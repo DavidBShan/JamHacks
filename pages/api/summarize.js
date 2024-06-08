@@ -10,10 +10,9 @@ export default async function handler(req, res) {
             if (!data) {
                 throw new Error("Unable to retrieve summarized text");
             }
-            console.log(data);
             res.status(200).json({ data });
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
             res.status(500).json({ error: error.message });
         }
     } else {

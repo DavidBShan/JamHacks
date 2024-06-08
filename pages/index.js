@@ -12,7 +12,6 @@ function Index() {
     if (isLoading) return <div>Loading ...</div>;
     if (error) return <div>{error.message}</div>;
 
-    console.log(user)
     if (user) {
         router.push("/personal_info"); // Redirect to /journal if user is logged in
         return null; // Render nothing if redirecting

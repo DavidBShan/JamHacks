@@ -14,6 +14,7 @@ export default function Home() {
         { date: '2024-06-04', title: 'First day of journaling', content: 'Example of a journal entry you could write!' }
     ]);
     const [newEntry, setNewEntry] = useState({ date: '', content: '' });
+    const [imageDescription, newDescription] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -25,9 +26,10 @@ export default function Home() {
         if (date && content) {
             setJournalEntries([...journalEntries, { date, content }]);
             setNewEntry({ date: '', content: '' });
-
             try {
-                const res = await axios.post('/api/summarize', { prompt: `on ${date} ${content}` });
+                const cleanedContent = content.replace(/<img[^>]+src="data:image\/[^;]+;base64[^"]*"[^>]*>/g, '');
+                console.log(`on ${date} ${cleanedContent}` + `The user also attached an image that is about ${imageDescription}`);
+                const res = await axios.post('/api/summarize', { prompt: `on ${date} ${cleanedContent}` + `The user also attached an image that is about ${imageDescription}`});
                 const jsonArray = JSON.parse(res.data.data);
 
                 for (const { name, description } of jsonArray) {
@@ -102,21 +104,28 @@ export default function Home() {
                                     const input = document.createElement('input');
                                     input.setAttribute('type', 'file');
                                     input.setAttribute('accept', 'image/*');
-
-                                    input.addEventListener('change', (e) => {
+                                
+                                    input.addEventListener('change', async (e) => {
                                         const file = e.target.files[0];
                                         const reader = new FileReader();
-                                        reader.addEventListener('load', () => {
+                                        reader.addEventListener('load', async () => {
                                             const id = 'blobid' + (new Date()).getTime();
                                             const blobCache = tinymce.activeEditor.editorUpload.blobCache;
                                             const base64 = reader.result.split(',')[1];
                                             const blobInfo = blobCache.create(id, file, base64);
                                             blobCache.add(blobInfo);
                                             cb(blobInfo.blobUri(), { title: file.name });
+                                
+                                            try {
+                                                const res = await axios.post('/api/imagizer', { prompt: base64 });
+                                                newDescription(res.data.data);
+                                            } catch (error) {
+                                                console.error("Error during image upload and processing:", error);
+                                            }
                                         });
                                         reader.readAsDataURL(file);
                                     });
-
+                                
                                     input.click();
                                 },
                                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'

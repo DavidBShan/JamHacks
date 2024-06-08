@@ -26,7 +26,6 @@ export default async function handler(req, res) {
         });
 
         const allRecords = [...recordsWithConnections, ...recordsStandaloneNodes];
-        console.log(allRecords)
         res.status(200).json(allRecords);
     } catch (error) {
         res.status(500).json({ error: error.message });
