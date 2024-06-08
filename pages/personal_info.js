@@ -96,10 +96,6 @@ export default function Home() {
                 <div className={styles.infoSection}>
                     <div className={styles.infoContent}>
                         <div className={styles.infoText}>
-<<<<<<< HEAD
-                            <h3>Emergency Contact:</h3>
-                            <p>Name: <br /> Phone Number: <br /> Email Address: <br /> Home Address:</p>
-=======
                             {isEditingEmergencyContact ? (
                                 <>
                                     <h3>Emergency Contact:</h3>
@@ -163,7 +159,6 @@ export default function Home() {
                                     </p>
                                 </>
                             )}
->>>>>>> 164adbaa5592e419d577e103673b5c022d619b75
                         </div>
                         {isEditingEmergencyContact ? (
                             <button className={styles.editButton} onClick={handleSaveEmergencyContactClick}>
