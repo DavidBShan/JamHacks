@@ -34,7 +34,6 @@ export default function Home() {
                         <h2>{entry.date}</h2>
                         <h3>{entry.title}</h3>
                         <p>{entry.content}</p>
-                        <button>Edit</button>
                     </div>
                 ))}
                 <div className={styles.newEntry}>
@@ -62,7 +61,7 @@ export default function Home() {
                     />
                     <textarea
                         name="content"
-                        placeholder="SWAP WITH CONTENT"
+                        placeholder=" Enter Text Here"
                         value={newEntry.content}
                         onChange={handleInputChange}
                     />
