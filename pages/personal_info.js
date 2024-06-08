@@ -12,7 +12,7 @@ export default function Home() {
             <div className={styles.sidebar}>
 
                 <div className={styles.usernameSection}>
-                    {user_name}
+
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                 </div>
                 <button className={styles.sidebarButton}>Connection</button>
@@ -42,7 +42,7 @@ export default function Home() {
                     <div className={styles.infoContent}>
                         <div className={styles.infoText}>
                             <h3>Emergency Contact:</h3>
-                            <p>Name: <br/> Phone Number: <br/> Email Address: <br/> Home Address:</p>
+                            <p>Name: <br /> Phone Number: <br /> Email Address: <br /> Home Address:</p>
                         </div>
                         <button className={styles.editButton}>Edit</button>
                     </div>
