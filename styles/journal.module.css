@@ -194,13 +194,10 @@
     margin-bottom: 10px; /* Add some space between the picture and the name */
 }
 
-.largeProfilePicture {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.largeProfilePictureContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between image and text */
 }
 
 .largeProfilePictureContainer {

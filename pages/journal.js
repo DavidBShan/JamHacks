@@ -58,13 +58,14 @@ export default function Home() {
         <div className={styles.container}>
             <div className={styles.sidebar}>
                 <div className={styles.logoSection}></div>
-                <div className={styles.usernameSection}>
-                    {userName}
+                
+                    <Link href="/personal_info" className={styles.sidebarButton}>
                     <img src={userPicture} alt="Profile" className={styles.profilePicture} />
-                </div>
-                <Link href = "/home" className={styles.sidebarButton}>Connection</Link>
-                <Link href = "/personal_info" className={styles.sidebarButton}>Personal Info</Link>
-                <Link href = "journal" className={styles.sidebarButton}>Journal</Link>
+                    <span>{userName}</span>
+                    </Link>
+                 
+                <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
+                <Link href="/home" className={styles.sidebarButton}>Connection</Link>   
             </div>
             <div className={styles.content}>
                 {journalEntries.map((entry, index) => (

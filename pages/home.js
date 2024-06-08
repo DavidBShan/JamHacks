@@ -87,12 +87,13 @@ export default function Home() {
 
                 </div>
                 <div className={styles.usernameSection}>
-                    <span>{user_name}</span>
+                    <Link href="/personal_info" className={styles.sidebarButton}>
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
-                </div>
-                <button className={styles.sidebarButton}>Connection</button>
-                <button className={styles.sidebarButton}>Personal Info</button>
-                <button className={styles.sidebarButton}>Journal</button>
+                    <span>{user_name}</span>
+                    </Link>
+                </div>  
+                <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
+                <Link href="/home" className={styles.sidebarButton}>Connection</Link>
             </div>
             <div className={styles.graphContainer}>
                 <h2 className={styles.graphTitle}>Graph View</h2>
