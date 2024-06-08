@@ -1,42 +1,26 @@
-import { useEffect, useState } from 'react';
-import Graph from '../components/Graph';
 
-export default function Home() {
-    const [graphData, setGraphData] = useState({ nodes: [], relationships: [] });
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch('/api/graph-data');
-                const data = await res.json();
-                if (!Array.isArray(data)) {
-                    throw new Error('Data is not an array');
-                }
-    
-                setGraphData({
-                    nodes: data.flatMap(d => d.nodes),
-                    relationships: data.map(d => ({ from: d.nodes[0].name, to: d.nodes[1].name, type: d.relationship.description }))
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-    
-        fetchData();
-    }, []);
-    
+import React from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
-    const handleNodeClick = (nodeId) => {
-        console.log('Node clicked:', nodeId);
-    };
 
-    const handleEdgeClick = (edgeId) => {
-        console.log('Edge clicked:', edgeId);
-    };
+function index() {
 
-    return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4">AuraDB Graph Visualization</h1>
-            <Graph data={graphData} onNodeClick={handleNodeClick} onEdgeClick={handleEdgeClick} />
-        </div>
-    );
+    const { user, error, isLoading } = useUser();
+    if (isLoading) return <div>Loading ...</div>;
+    if (error) return <div>{error.message}</div>;
+
+    if (user) {
+        return (
+            <div>
+                Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
+            </div>
+        );
+    }
+
+
+
+    return <a href="/api/auth/login">Login</a>
+
 }
+
+export default index;
