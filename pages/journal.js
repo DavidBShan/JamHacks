@@ -6,7 +6,9 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Home() {
     const [currentPage, setCurrentPage] = useState('journal');
-
+    const { user, error, isLoading } = useUser();
+    const user_name = user ? user.name : "Guest"; // Fallback to "Guest" if user is not defined
+    const user_picture = user ? user.picture : "/default-profile.png"; 
     const [journalEntries, setJournalEntries] = useState([
         { date: '2024-06-04', title: 'First day of journaling', content: 'Example of a journal entry you could write!' }
     ]);
@@ -28,7 +30,7 @@ export default function Home() {
                 const jsonString = res.data.data; // Assuming this is a JSON string
                 const jsonArray = JSON.parse(jsonString); // Convert JSON string to array
 
-                const bob = 'David Shan';
+                const name = user_name;
 
                 for (const { name, description } of jsonArray) {
                     const nodeExists = await axios.post('/api/node-exist', { nodeName: name });
@@ -36,12 +38,12 @@ export default function Home() {
                     if (!nodeExists.data.nodeExists) {
                         await axios.post('/api/add-node', { nodeName: name });
                     }
-                    const relationshipExists = await axios.post('/api/relationship-exist', { fromNodeName: bob, toNodeName: name });
+                    const relationshipExists = await axios.post('/api/relationship-exist', { fromNodeName: user_name, toNodeName: name });
                     console.log(relationshipExists.data)
                     if (!relationshipExists.data.relationshipExists) {
-                        await axios.post('/api/add-relationships', { fromNodeName: bob, toNodeName: name, description: description });
+                        await axios.post('/api/add-relationships', { fromNodeName: user_name, toNodeName: name, description: description });
                     } else {
-                        await axios.post('/api/edit-relationships', { fromNodeName: bob, toNodeName: name, newDescription: description });
+                        await axios.post('/api/edit-relationships', { fromNodeName: user_name, toNodeName: name, newDescription: description });
                     }
                 }
             } catch (error) {
@@ -52,11 +54,7 @@ export default function Home() {
 
     const handleNavigation = (page) => {
         setCurrentPage(page);
-    };
-
-    const { user, error, isLoading } = useUser();
-    const user_name = user ? user.name : "Guest"; // Fallback to "Guest" if user is not defined
-    const user_picture = user ? user.picture : "/default-profile.png"; // Fallback to a default profile picture
+    };// Fallback to a default profile picture
 
     return (
         <div className={styles.container}>

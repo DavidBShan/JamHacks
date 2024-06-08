@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from '../styles/personal_info.module.css';
 import { useUser } from "@auth0/nextjs-auth0/client";
 
@@ -6,11 +7,8 @@ export default function Home() {
     const { user, error, isLoading } = useUser();
     const user_name = user ? user.name : "Guest";
     const user_picture = user ? user.picture : "/default-profile.png";
-
     const [isEditingAddress, setIsEditingAddress] = useState(false);
     const [isEditingEmergencyContact, setIsEditingEmergencyContact] = useState(false);
-
-    const [name, setName] = useState(user_name);
     const [address, setAddress] = useState("Home address here, Postal Code, City, Province");
     const [emergencyContact, setEmergencyContact] = useState({
         name: "",
@@ -19,20 +17,76 @@ export default function Home() {
         home: "",
     });
 
+    useEffect(() => {
+        if (user) {
+            checkAndAddNode(user_name);
+        }
+    }, [user_name]);
+
+    const checkAndAddNode = async (userName) => {
+        try {
+            const nodeExists = await axios.post('/api/node-exist', { nodeName: userName });
+            console.log(nodeExists.data.nodeExists);
+            if (!nodeExists.data.nodeExists) {
+                await axios.post('/api/add-node', { nodeName: userName });
+            } else {
+                const nodeData = await axios.post('/api/get-node-data', { nodeName: userName });
+                console.log(nodeData.data);
+                const data = nodeData.data;
+                setAddress(data.address);
+                setEmergencyContact({
+                    name: data.emergencyName,
+                    phone: data.emergencyPhone,
+                    email: data.emergencyEmail,
+                    home: data.emergencyHome,
+                });
+            }
+        } catch (error) {
+            console.error('Error checking or adding node:', error);
+        }
+    };
+
     const handleEditAddressClick = () => {
         setIsEditingAddress(true);
     };
 
-    const handleSaveAddressClick = () => {
+    const handleSaveAddressClick = async () => {
         setIsEditingAddress(false);
+        try {
+            console.log('Updating address:', address)
+            console.log('User name:', user_name)
+            await axios.post('/api/edit-node', {
+                nodeName: user_name,
+                address: address,
+                emergencyName: emergencyContact.name,
+                emergencyPhone: emergencyContact.phone,
+                emergencyEmail: emergencyContact.email,
+                emergencyHome: emergencyContact.home,
+            });
+        } catch (error) {
+            console.error('Error updating address:', error);
+        }
     };
 
     const handleEditEmergencyContactClick = () => {
         setIsEditingEmergencyContact(true);
     };
 
-    const handleSaveEmergencyContactClick = () => {
+    const handleSaveEmergencyContactClick = async () => {
         setIsEditingEmergencyContact(false);
+        try {
+            console.log("Updating emergency contact:", emergencyContact);
+            await axios.post('/api/edit-node', {
+                nodeName: user_name,
+                address: address,
+                emergencyName: emergencyContact.name,
+                emergencyPhone: emergencyContact.phone,
+                emergencyEmail: emergencyContact.email,
+                emergencyHome: emergencyContact.home,
+            });
+        } catch (error) {
+            console.error('Error updating emergency contact:', error);
+        }
     };
 
     const handleChange = (e, setter) => {
@@ -43,7 +97,6 @@ export default function Home() {
         <div className={styles.container}>
             <div className={styles.sidebar}>
                 <div className={styles.usernameSection}>
-
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                 </div>
                 <button className={styles.sidebarButton}>Connection</button>
