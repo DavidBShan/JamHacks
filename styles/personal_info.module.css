@@ -26,7 +26,7 @@
     margin-bottom: 10px;
     text-align: center;
     color: white;
-    font-weight: bold;
+    font-weight: bold;  
 }
 
 .profilePicture {
@@ -36,20 +36,35 @@
     margin-bottom: 10px; /* Add some space between the picture and the name */
 }
 
+.largeProfilePictureContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between image and text */
+}
+
 .largeProfilePicture {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-.largeProfilePictureContainer {
+.infoContent {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100%; /* Adjust as needed */
+    width: 100%;
+    gap: 10px; /* Space between text and edit button */
+}
+
+.infoText {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Make it take up the remaining space */
+}
+
+.editIcon {
+    cursor: pointer;
+    color: white;
 }
 
 .sidebarButton {
@@ -73,25 +88,12 @@
 }
 
 .infoSection {
-    background-color: #c689ff; 
+    background-color: #8184d5; 
     padding: 20px;
     border-radius: 12px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.infoContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.infoText {
-    color: white;
-    display: flex;
     flex-direction: column;
+    gap: 10px; /* Space between elements */
 }
 
 .editButton {
@@ -116,7 +118,7 @@
 .logoSection {
     border-radius: 12px;
     background-color: #161719; /* Fallback color */
-    background-image: url('../public/pictures/logoPic.png'); /* Path relative to the public folder */
+    background-image: url('/pictures/logoPic.png'); /* Path relative to the public folder */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -132,4 +134,3 @@
     color: white;
     font-weight: bold;
 }
-

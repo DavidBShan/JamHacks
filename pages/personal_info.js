@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import styles from '../styles/personal_info.module.css';
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { FaEdit } from 'react-icons/fa';
 
 export default function Home() {
     const { user, error, isLoading } = useUser();
     const user_name = user ? user.name : "Guest";
     const user_picture = user ? user.picture : "/default-profile.png";
 
+    const [isEditingName, setIsEditingName] = useState(false);
     const [isEditingAddress, setIsEditingAddress] = useState(false);
     const [isEditingEmergencyContact, setIsEditingEmergencyContact] = useState(false);
-
     const [name, setName] = useState(user_name);
-    const [address, setAddress] = useState("Home address here, Postal Code, City, Province");
+    const [address, setAddress] = useState({
+        homeAddress: "Home address here",
+        postalCode: "Postal Code",
+        city: "City",
+        province: "Province",
+        country: "Country"
+    });
     const [emergencyContact, setEmergencyContact] = useState({
         name: "",
         phone: "",
@@ -54,9 +61,9 @@ export default function Home() {
             <div className={styles.content}>
                 <div className={styles.infoSection}>
                     <div className={styles.infoContent}>
-                        <div className={styles.infoText}>
+                        <div className={styles.largeProfilePictureContainer}>
                             <img src={user_picture} alt="Profile" className={styles.largeProfilePicture} />
-                            <div>
+                            <div className={styles.infoText}>
                                 <h3>Hi! I'm...</h3>
                                 <h2>{user_name}</h2>
                             </div>
@@ -71,15 +78,44 @@ export default function Home() {
                                     <h3>I live at...</h3>
                                     <input
                                         type="text"
-                                        value={address}
-                                        onChange={(e) => handleChange(e, setAddress)}
+                                        placeholder="Home Address"
+                                        value={address.homeAddress}
+                                        onChange={(e) => setAddress({...address, homeAddress: e.target.value})}
+                                        className={styles.input}
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Postal Code"
+                                        value={address.postalCode}
+                                        onChange={(e) => setAddress({...address, postalCode: e.target.value})}
+                                        className={styles.input}
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="City"
+                                        value={address.city}
+                                        onChange={(e) => setAddress({...address, city: e.target.value})}
+                                        className={styles.input}
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Province"
+                                        value={address.province}
+                                        onChange={(e) => setAddress({...address, province: e.target.value})}
+                                        className={styles.input}
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Country"
+                                        value={address.country}
+                                        onChange={(e) => setAddress({...address, country: e.target.value})}
                                         className={styles.input}
                                     />
                                 </>
                             ) : (
                                 <>
                                     <h3>I live at...</h3>
-                                    <p>{address}</p>
+                                    <p>{address.homeAddress}, {address.postalCode}, {address.city}, {address.province}, {address.country}</p>
                                 </>
                             )}
                         </div>

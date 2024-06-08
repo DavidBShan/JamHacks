@@ -48,8 +48,8 @@
 .journalEntry {
     margin-bottom: 20px;
     padding: 10px;
-    border: 10px solid #d4a0ff;
-    background-color: #c689ff;
+    border: 10px solid #857351;
+    background-color: #b19a6c;
     border-radius: 10px;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .newEntryContainer {
-    background-color: #c689ff;
+    background-color: #b19a6c;
     border-radius: 20px;
     padding: 20px;
     margin-top: auto;
