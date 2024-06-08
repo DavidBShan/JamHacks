@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url('../pictures/backgroundPic.png');
+    background-image: url('../public/pictures/backgroundPic.png');
     /* Replace with your background image path */
     background-size: cover;
     background-position: center;

@@ -1,6 +1,10 @@
 import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
 import React, { useRef, useEffect } from 'react';
+
+// Import Font Awesome to ensure it is available globally
+import '@fortawesome/fontawesome-free/css/all.css';
+
 const Graph = ({ data, onNodeClick, onEdgeClick }) => {
     const container = useRef(null);
 
@@ -8,8 +12,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         if (!data || !data.nodes || !data.relationships) {
             return;
         }
-        //console.log(data);
-        // Initialize datasets for nodes and edges
+
         const nodeMap = {}; // Map to store node name to ID mapping
         const nodes = new DataSet(data.nodes.map((node, index) => {
             const nodeId = `node_${index}`; // Generate unique ID for node
@@ -17,8 +20,8 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
             return { id: nodeId, label: node.name };
         }));
 
-        const edges = new DataSet(data.relationships.map((rel, index) => ({
-            id: `${rel.from}-${rel.to}`, // Use index as a unique identifier for edges
+        const edges = new DataSet(data.relationships.map((rel) => ({
+            id: `${rel.from}-${rel.to}`, // Use from-to as a unique identifier for edges
             from: nodeMap[rel.from], // Retrieve ID of 'from' node from the mapping
             to: nodeMap[rel.to], // Retrieve ID of 'to' node from the mapping
             label: `${rel.from}-${rel.to}`
@@ -30,8 +33,8 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
                 shape: "icon",
                 icon: {
                     face: "'Font Awesome 5 Free'",
-                    weight: "bold", // Font Awesome 5 doesn't work properly unless bold.
-                    code: "\uf1ad",
+                    weight: "900", // Font Awesome 5 requires a weight of 900 (bold)
+                    code: "\uf183", // Unicode for the 'person' icon
                     size: 50,
                     color: "#f0a30a",
                 },
@@ -41,22 +44,25 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
             }
         };
 
-        const network = new Network(container.current, networkData, options);
+        // Ensure the font is loaded before creating the network
+        document.fonts.ready.then(() => {
+            const network = new Network(container.current, networkData, options);
 
-        // Add event listeners
-        network.on('click', (params) => {
-            if (params.nodes.length > 0) {
-                onNodeClick(params.nodes[0]);
-            } else if (params.edges.length > 0) {
-                onEdgeClick(params.edges[0]);
-            }
+            // Add event listeners
+            network.on('click', (params) => {
+                if (params.nodes.length > 0) {
+                    onNodeClick(params.nodes[0]);
+                } else if (params.edges.length > 0) {
+                    onEdgeClick(params.edges[0]);
+                }
+            });
+
+            // Clean up event listeners and network on component unmount
+            return () => {
+                network.off('click');
+                network.destroy();
+            };
         });
-
-        // Clean up event listeners and network on component unmount
-        return () => {
-            network.off('click');
-            network.destroy();
-        };
     }, [data, onNodeClick, onEdgeClick]);
 
     return <div ref={container} style={{ height: '700px' }} />;

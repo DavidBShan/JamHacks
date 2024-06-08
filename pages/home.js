@@ -3,6 +3,7 @@ import Graph from '../components/Graph';
 import axios from 'axios';
 import styles from '../styles/home.module.css';
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Link from 'next/link';
 
 export default function Home() {
     const [graphData, setGraphData] = useState({ nodes: [], relationships: [] });
@@ -92,9 +93,9 @@ export default function Home() {
                         <span>{user_name}</span>
                         <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                     </div>
-                    <button className={styles.sidebarButton}>Connection</button>
-                    <button className={styles.sidebarButton}>Personal Info</button>
-                    <button className={styles.sidebarButton}>Journal</button>
+                    <Link href = "/home" className={styles.sidebarButton}>Connection</Link>
+                    <Link href = "/personal_info" className={styles.sidebarButton}>Personal Info</Link>
+                    <Link href = "journal" className={styles.sidebarButton}>Journal</Link>
                 </div>
                 <div className={styles.graphContainer}>
                     <h2 className={styles.graphTitle}>Graph View</h2>

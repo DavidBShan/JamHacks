@@ -3,6 +3,8 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 import styles from '../styles/landing.module.css';
 
+
+
 function Index() {
     const { user, error, isLoading } = useUser();
     const router = useRouter();
@@ -27,3 +29,4 @@ function Index() {
 }
 
 export default Index;
+
