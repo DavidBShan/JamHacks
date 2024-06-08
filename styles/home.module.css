@@ -63,8 +63,9 @@
 }
 
 .graphContainer {
-    margin-left: 12%;
-    border: 20px solid #f682b1;
+    margin-left: 0%;
+    background-image: url('/pictures/graphPic.png');
+    border: 20px solid #b19a6c;
     border-radius: 12px;
     padding: 20px;
     background-color: #ffffff;
