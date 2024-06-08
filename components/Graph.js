@@ -27,10 +27,14 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         const networkData = { nodes, edges };
         const options = {
             nodes: {
-                color: {
-                    background: '#ff0000', // Red background color for nodes
-                    border: '#000000' // Black border color for nodes
-                }
+                shape: "icon",
+                icon: {
+                    face: "'Font Awesome 5 Free'",
+                    weight: "bold", // Font Awesome 5 doesn't work properly unless bold.
+                    code: "\uf1ad",
+                    size: 50,
+                    color: "#f0a30a",
+                },
             },
             edges: {
                 color: '#00ff00' // Green color for edges
@@ -55,7 +59,7 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         };
     }, [data, onNodeClick, onEdgeClick]);
 
-    return <div ref={container} style={{ height: '500px' }} />;
+    return <div ref={container} style={{ height: '700px' }} />;
 };
 
 export default Graph;
