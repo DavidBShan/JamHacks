@@ -1,8 +1,8 @@
 import { useState } from 'react';
-
 import styles from '../styles/journal.module.css';
 import axios from 'axios';
 import Link from 'next/link'
+import playSound from "play-sound";
 
 export default function Home() {
     const [currentPage, setCurrentPage] = useState('journal');
@@ -28,22 +28,16 @@ export default function Home() {
                 const bob = 'David Shan';
 
                 for (const { name, description } of jsonArray) {
-                    // Check if the node exists for the person
                     const nodeExists = await axios.post('/api/node-exist', { nodeName: name });
                     console.log(nodeExists.data.nodeExists)
                     if (!nodeExists.data.nodeExists) {
-                        // Create the node if it doesn't exist
                         await axios.post('/api/add-node', { nodeName: name });
                     }
-
-                    // Check if the relationship exists between Bob and the person
                     const relationshipExists = await axios.post('/api/relationship-exist', { fromNodeName: bob, toNodeName: name });
                     console.log(relationshipExists.data)
                     if (!relationshipExists.data.relationshipExists) {
-                        // Create the relationship if it doesn't exist
                         await axios.post('/api/add-relationships', { fromNodeName: bob, toNodeName: name, description: description });
                     } else {
-                        // Edit the relationship if it exists
                         await axios.post('/api/edit-relationships', { fromNodeName: bob, toNodeName: name, newDescription: description });
                     }
                 }

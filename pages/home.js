@@ -4,6 +4,7 @@ import axios from 'axios';
 
 export default function Home() {
     const [graphData, setGraphData] = useState({ nodes: [], relationships: [] });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -17,17 +18,15 @@ export default function Home() {
                 const relationships = [];
                 data.forEach(d => {
                     d.nodes.forEach(node => {
-                        d.nodes.forEach(node => {
-                            if (!nodes.some(existingNode => existingNode.name === node.name)) {
-                                nodes.push(node);
-                            }
-                        });
+                        if (!nodes.some(existingNode => existingNode.name === node.name)) {
+                            nodes.push(node);
+                        }
                     });
                     if (d.relationship) {
                         relationships.push({
                             from: d.nodes[0].name,
-                            to: d.nodes[1] ? d.nodes[1].name : null, 
-                            type: d.relationship.description || null 
+                            to: d.nodes[1] ? d.nodes[1].name : null,
+                            type: d.relationship.description || null
                         });
                     }
                 });
@@ -53,11 +52,29 @@ export default function Home() {
         const response = await axios.post('/api/get-edge-description', { fromName, toName });
         const data = response.data;
         var sendName = fromName;
-        if (fromName == "David Shan"){
+        if (fromName === "David Shan") {
             sendName = toName;
         }
         const res = await axios.post('/api/describe', { prompt: data, name: sendName });
         const jsonString = res.data.data;
+        const buffer = await axios.post('/api/speak', { prompt: jsonString });
+        console.log(buffer.data.response.data);
+        
+        // Convert ArrayBuffer to Uint8Array
+        const audioData = new Uint8Array(buffer.data.response.data);
+
+        // Create a Blob from the audio data
+        const blob = new Blob([audioData], { type: 'audio/mpeg' });
+
+        // Create a URL for the Blob
+        const url = URL.createObjectURL(blob);
+
+        // Create an <audio> element
+        const audio = new Audio(url);
+
+        // Play the audio
+        audio.play();
+
         console.log('Edge clicked:', jsonString);
     };
 
