@@ -54,7 +54,7 @@ export default function Home() {
                 <div className={styles.infoSection}>
                     <div className={styles.infoContent}>
                         <div className={styles.infoText}>
-                            <img src={user_picture} alt="Profile" className={styles.largeProfilePicture} />
+                            <center><img src={user_picture} alt="Profile" className={styles.largeProfilePicture} /></center>
                             <div>
                                 <h3>Hi! I'm...</h3>
                                 <h2>{user_name}</h2>
