@@ -3,23 +3,6 @@ import styles from '../styles/personal_info.module.css';
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Home() {
-    const [journalEntries, setJournalEntries] = useState([
-        { date: '2024-06-04', title: 'First day of journaling', content: 'Example of a journal entry you could write!' }
-    ]);
-    const [newEntry, setNewEntry] = useState({ year: '', month: '', day: '', content: '' });
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewEntry({ ...newEntry, [name]: value });
-    };
-
-    const handleCreateEntry = () => {
-        const { year, month, day, content } = newEntry;
-        if (year && month && day && content) {
-            setJournalEntries([...journalEntries, { date: `${year}-${month}-${day}`, title: 'New Entry', content }]);
-            setNewEntry({ year: '', month: '', day: '', content: '' });
-        }
-    };
 
     const { user, error, isLoading } = useUser();
     const user_name = user ? user.name : "Guest"; // Fallback to "Guest" if user is not defined
@@ -37,45 +20,10 @@ export default function Home() {
                 <button className={styles.sidebarButton}>Journal</button>
             </div>
             <div className={styles.content}>
-                {journalEntries.map((entry, index) => (
-                    <div className={styles.journalEntry} key={index}>
-                        <h2>{entry.date}</h2>
-                        <h3>{entry.title}</h3>
-                        <p>{entry.content}</p>
-                    </div>
-                ))}
-                <div className={styles.newEntry}>
-                    <h3>Start Journaling</h3>
-                    <input
-                        type="text"
-                        name="year"
-                        placeholder="Year"
-                        value={newEntry.year}
-                        onChange={handleInputChange}
-                    />
-                    <input
-                        type="text"
-                        name="month"
-                        placeholder="Month"
-                        value={newEntry.month}
-                        onChange={handleInputChange}
-                    />
-                    <input
-                        type="text"
-                        name="day"
-                        placeholder="Day"
-                        value={newEntry.day}
-                        onChange={handleInputChange}
-                    />
-                    <textarea
-                        name="content"
-                        placeholder=" Enter Text Here"
-                        value={newEntry.content}
-                        onChange={handleInputChange}
-                    />
-                    <button onClick={handleCreateEntry}>Create</button>
-                </div>
+                <h3>Hi! My name is..</h3>
+
             </div>
         </div>
+
     );
 }

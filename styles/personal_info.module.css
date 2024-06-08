@@ -17,10 +17,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* This aligns the items on the sides of the container */
     width: 100%;
     padding: 10px;
-    /* Add some padding for better spacing */
 }
 
 .usernameSection span {
@@ -101,4 +99,15 @@
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.content {
+    padding: 20px;
+    background-color: #c689ff;
+    width: calc(100% - 240px);
+    height: 200px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
 }
