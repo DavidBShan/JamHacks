@@ -77,21 +77,27 @@
 .graphTitle {
     margin-bottom: 20px;
     font-size: 1.5rem;
+    color: #b19a6c;
     font-weight: bold;
     text-align: center;
 }
 
 .logoSection {
     border-radius: 12px;
-    background-color: #161719; /* Fallback color */
-    background-image: url('/pictures/logoPic.png'); /* Path relative to the public folder */
+    background-color: #161719;
+    /* Fallback color */
+    background-image: url('/pictures/logoPic.png');
+    /* Path relative to the public folder */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* Center items vertically */
     width: 100%;
     height: 120px;
     padding: 10px;
@@ -102,16 +108,20 @@
 }
 
 .profilePicture {
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
+    width: 50px;
+    /* Adjust as needed */
+    height: 50px;
+    /* Adjust as needed */
     border-radius: 50%;
-    margin-bottom: 10px; /* Add some space between the picture and the name */
+    margin-bottom: 10px;
+    /* Add some space between the picture and the name */
 }
 
 .largeProfilePictureContainer {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between image and text */
+    gap: 10px;
+    /* Space between image and text */
 }
 
 .largeProfilePicture {
@@ -123,9 +133,12 @@
 .usernameSection {
     border-radius: 12px;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* Center items vertically */
     width: 100%;
     height: 120px;
     padding: 10px;
@@ -133,5 +146,5 @@
     margin-bottom: 10px;
     text-align: center;
     color: white;
-    font-weight: bold;  
+    font-weight: bold;
 }
