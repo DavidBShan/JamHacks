@@ -26,22 +26,16 @@
     cursor: pointer;
 }
 
-.stopButton {
+.sidebarButtonMain {
     border-radius: 12px;
-    background-color: #9d0000;
+    background-color: #9347b7;
     color: white;
     border: none;
     padding: 10px;
     margin-bottom: 10px;
     width: 100%;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
-}
-
-.disabledButton {
-    background-color: #9d0000; /* Gray background color for disabled button */
-    cursor: not-allowed; /* Change cursor to indicate that the button is not clickable */
-    opacity: 0.6; /* Reduce opacity to visually indicate that the button is disabled */
 }
 
 
@@ -52,7 +46,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background-color: #c689ff;
+    background-color: #4f4f4f;
     margin-bottom: 10px;
     text-align: center;
     color: white;
@@ -170,4 +164,22 @@
     text-align: center;
     color: white;
     font-weight: bold;
+}
+
+.stopButton {
+    border-radius: 12px;
+    background-color: #9d0000;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.disabledButton {
+    background-color: #9d0000; /* Gray background color for disabled button */
+    cursor: not-allowed; /* Change cursor to indicate that the button is not clickable */
+    opacity: 0.6; /* Reduce opacity to visually indicate that the button is disabled */
 }

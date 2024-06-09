@@ -116,6 +116,23 @@
     font-weight: bold;
 }
 
+.journalTopParagraph {
+    font-size: 20px;
+    color: white;
+}
+
+.sidebarButtonMain {
+    border-radius: 12px;
+    background-color: #65387b;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
 
 .newEntry {
     display: flex;
@@ -174,13 +191,11 @@
 .usernameSection {
     border-radius: 12px;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 120px;
     padding: 10px;
-    background-color: #4f4f4f;
+    background-color: #c689ff;
     margin-bottom: 10px;
     text-align: center;
     color: white;
@@ -194,13 +209,10 @@
     margin-bottom: 10px; /* Add some space between the picture and the name */
 }
 
-.largeProfilePicture {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.largeProfilePictureContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between image and text */
 }
 
 .largeProfilePictureContainer {
@@ -248,4 +260,8 @@
     text-align: center;
     color: white;
     font-weight: bold;
+}
+
+.sidebarButton:hover {
+    background-color: #b389ff;
 }

@@ -105,13 +105,12 @@ export default function Home() {
                 <div className={styles.logoSection}>
 
                 </div>
-                <div className={styles.usernameSection}>
+                <Link href="/personal_info" className={styles.sidebarButton}>
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                     <span>{user_name}</span>
-                </div>
-                <Link href="/home" className={styles.sidebarButton}>Connection</Link>
-                <Link href="/personal_info" className={styles.sidebarButton}>Personal Info</Link>
+                </Link>
                 <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
+                <Link href="/home" className={styles.sidebarButtonMain}>Connection</Link>
                 <button 
                     className={`${styles.stopButton} ${!isAudioPlaying ? styles.disabledButton : ''}`} 
                     onClick={stopAudio} 

@@ -58,14 +58,14 @@ export default function Home() {
         <div className={styles.container}>
             <div className={styles.sidebar}>
                 <div className={styles.logoSection}></div>
-                <div className={styles.usernameSection}>
-                    
+                
+                    <Link href="/personal_info" className={styles.sidebarButton}>
                     <img src={userPicture} alt="Profile" className={styles.profilePicture} />
-                    {userName}
-                </div>
-                <Link href = "/home" className={styles.sidebarButton}>Connection</Link>
-                <Link href = "/personal_info" className={styles.sidebarButton}>Personal Info</Link>
-                <Link href = "journal" className={styles.sidebarButton}>Journal</Link>
+                    <span>{userName}</span>
+                    </Link>
+                 
+                <Link href="/journal" className={styles.sidebarButtonMain}>Journal</Link>
+                <Link href="/home" className={styles.sidebarButton}>Connection</Link>   
             </div>
             <div className={styles.content}>
                 {journalEntries.map((entry, index) => (
@@ -80,6 +80,7 @@ export default function Home() {
                 <div className={styles.newEntryContainer}>
                     <div className={styles.newEntry}>
                         <h2 className={styles.journalEntryTopTitle}>Start Journaling</h2>
+                        <h2 className = {styles.journalTopParagraph}>Type on your keyboard a journal entry with the person's first and last name mentioned. You can add pictures as well!</h2>
                         <input
                             type="date"
                             name="date"
