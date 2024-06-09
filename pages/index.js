@@ -19,7 +19,7 @@ function Index() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>RecallAid</h1>
+            <h1 className={styles.title}>MemorEase</h1>
             <p className={styles.description}>Your personal memory assistant.</p>
             <a href="/api/auth/login" className={styles.loginButton}>Login</a>
         </div>
