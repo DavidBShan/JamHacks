@@ -51,8 +51,8 @@ export default function UserProfile() {
     };
 
     const capitalizeWords = (str) => {
-        if (!str) return ''; // Handle cases where str is undefined or empty
-        return str.replace(/([A-Z])/g, ' $1').replace(/^./, str[0].toUpperCase()).trim();
+        if(!str) return str;
+        return str.replace(/([A-Z])/g, ' $1').trim(); // Add space before capital letters
     };
 
     const handleSaveEmergencyContactClick = async () => {
@@ -74,8 +74,7 @@ export default function UserProfile() {
 
     const checkAndAddNode = async (userName) => {
         try {
-            console.log(username); // Log the username to the console
-            console.log(capitalizeWords(userName));
+            if(!userName) return;
             const nodeData = await axios.post(`/api/get-node-data`, {nodeName: capitalizeWords(userName)});
             console.log(nodeData.data);
             const data = nodeData.data;
@@ -100,7 +99,7 @@ export default function UserProfile() {
             <div className={styles.sidebar}>
                 <div className={styles.usernameSection}>
                     <Link href="/personal_info">
-                        <span>{username.replace(/([A-Z])/g, ' $1').trim()}</span>
+                        <span>{capitalizeWords(username)}</span>
                     </Link>
                 </div>
                 <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
@@ -113,7 +112,7 @@ export default function UserProfile() {
                         <div className={styles.largeProfilePictureContainer}>
                             <div>
                                 <h3>Hi! I'm...</h3>
-                                <h2>{username.replace(/([A-Z])/g, ' $1').trim()}</h2>
+                                <h2>{capitalizeWords(username)}</h2>
                             </div>
                         </div>
                     </div>
