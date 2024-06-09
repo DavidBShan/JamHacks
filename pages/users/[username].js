@@ -137,15 +137,6 @@ export default function UserProfile() {
                                 </>
                             )}
                         </div>
-                        {isEditingAddress ? (
-                            <button className={styles.editButton} onClick={handleSaveAddressClick}>
-                                Save
-                            </button>
-                        ) : (
-                            <button className={styles.editButton} onClick={handleEditAddressClick}>
-                                Edit
-                            </button>
-                        )}
                     </div>
                 </div>
                 <div className={styles.infoSection}>
@@ -215,15 +206,6 @@ export default function UserProfile() {
                                 </>
                             )}
                         </div>
-                        {isEditingEmergencyContact ? (
-                            <button className={styles.editButton} onClick={handleSaveEmergencyContactClick}>
-                                Save
-                            </button>
-                        ) : (
-                            <button className={styles.editButton} onClick={handleEditEmergencyContactClick}>
-                                Edit
-                            </button>
-                        )}
                     </div>
                 </div>
             </div>
