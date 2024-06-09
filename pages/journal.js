@@ -29,7 +29,7 @@ export default function Home() {
             try {
                 const cleanedContent = content.replace(/<img[^>]+src="data:image\/[^;]+;base64[^"]*"[^>]*>/g, '');
                 console.log(`on ${date} ${cleanedContent}` + `The user also attached an image that is about ${imageDescription}`);
-                const res = await axios.post('/api/summarize', { prompt: `on ${date} ${cleanedContent}` + `The user also attached an image that is about ${imageDescription}`});
+                const res = await axios.post('/api/summarize', { prompt: `on ${date} ${cleanedContent}` + `The user also attached an image that is about ${imageDescription}` });
                 const jsonArray = JSON.parse(res.data.data);
 
                 for (const { name, description } of jsonArray) {
@@ -58,14 +58,14 @@ export default function Home() {
         <div className={styles.container}>
             <div className={styles.sidebar}>
                 <div className={styles.logoSection}></div>
-                
-                    <Link href="/personal_info" className={styles.sidebarButton}>
+
+                <Link href="/personal_info" className={styles.sidebarButton}>
                     <img src={userPicture} alt="Profile" className={styles.profilePicture} />
                     <span>{userName}</span>
-                    </Link>
-                 
+                </Link>
+
                 <Link href="/journal" className={styles.sidebarButtonMain}>Journal</Link>
-                <Link href="/home" className={styles.sidebarButton}>Connection</Link>   
+                <Link href="/home" className={styles.sidebarButton}>Connection</Link>
             </div>
             <div className={styles.content}>
                 {journalEntries.map((entry, index) => (
@@ -80,7 +80,7 @@ export default function Home() {
                 <div className={styles.newEntryContainer}>
                     <div className={styles.newEntry}>
                         <h2 className={styles.journalEntryTopTitle}>Start Journaling</h2>
-                        <h2 className = {styles.journalTopParagraph}>Type on your keyboard a journal entry with the person's first and last name mentioned. You can add pictures as well!</h2>
+                        <h2 className={styles.journalTopParagraph}>Type on your keyboard a journal entry with the person's first and last name mentioned. You can add pictures as well!</h2>
                         <input
                             type="date"
                             name="date"
@@ -106,7 +106,7 @@ export default function Home() {
                                     const input = document.createElement('input');
                                     input.setAttribute('type', 'file');
                                     input.setAttribute('accept', 'image/*');
-                                
+
                                     input.addEventListener('change', async (e) => {
                                         const file = e.target.files[0];
                                         const reader = new FileReader();
@@ -117,7 +117,7 @@ export default function Home() {
                                             const blobInfo = blobCache.create(id, file, base64);
                                             blobCache.add(blobInfo);
                                             cb(blobInfo.blobUri(), { title: file.name });
-                                
+
                                             try {
                                                 const res = await axios.post('/api/imagizer', { prompt: base64 });
                                                 newDescription(res.data.data);
@@ -127,7 +127,7 @@ export default function Home() {
                                         });
                                         reader.readAsDataURL(file);
                                     });
-                                
+
                                     input.click();
                                 },
                                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
