@@ -123,7 +123,7 @@
 
 .sidebarButtonMain {
     border-radius: 12px;
-    background-color: #65387b;
+    background-color: #857351;
     color: white;
     border: none;
     padding: 10px;
@@ -166,8 +166,8 @@
 .createButton {
     padding: 10px;
     font-size: 1.2rem;
-    color: white;
-    background-color: #0070f3;
+    color: whitesmoke;
+    background-color: #4F4F4F;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -177,7 +177,7 @@
 }
 
 .createButton:hover {
-    background-color: #005bb5;
+    background-color: #3e3e3e;
 }
 
 
@@ -185,7 +185,7 @@
     background-color: #161719;
     padding: 20px;
     width: 200px;
-    height: 100%;
+    height: 1000px;
     display: flex;
     flex-direction: column;
 }
@@ -258,12 +258,13 @@
     width: 100%;
     height: 120px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     text-align: center;
     color: white;
     font-weight: bold;
+    margin-top: 50vh;
 }
 
 .sidebarButton:hover {
-    background-color: #b389ff;
+    background-color: #B19A6C;
 }

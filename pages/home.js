@@ -102,9 +102,6 @@ export default function Home() {
         
         <div className={styles.container}>
             <div className={styles.sidebar}>
-                <div className={styles.logoSection}>
-
-                </div>
                 <Link href="/personal_info" className={styles.sidebarButton}>
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                     <span>{user_name}</span>
@@ -118,6 +115,8 @@ export default function Home() {
                 >
                     Stop Audio
                 </button>
+                <div className={styles.logoSection}>
+                </div>
             </div>
             <div className={styles.graphContainer}>
                 <h2 className={styles.graphTitle}>Graph View</h2>

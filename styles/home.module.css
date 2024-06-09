@@ -28,7 +28,7 @@
 
 .sidebarButtonMain {
     border-radius: 12px;
-    background-color: #9347b7;
+    background-color: #857351;
     color: white;
     border: none;
     padding: 10px;
@@ -66,7 +66,7 @@
 }
 
 .sidebarButton:hover {
-    background-color: #b389ff;
+    background-color: #B19A6C;
 }
 
 .content {
@@ -121,6 +121,8 @@
     text-align: center;
     color: white;
     font-weight: bold;
+    margin-bottom:0; 
+    margin-top:43vh;
 }
 
 

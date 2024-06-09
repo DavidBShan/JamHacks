@@ -57,8 +57,6 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <div className={styles.sidebar}>
-                <div className={styles.logoSection}></div>
-
                 <Link href="/personal_info" className={styles.sidebarButton}>
                     <img src={userPicture} alt="Profile" className={styles.profilePicture} />
                     <span>{userName}</span>
@@ -66,6 +64,7 @@ export default function Home() {
 
                 <Link href="/journal" className={styles.sidebarButtonMain}>Journal</Link>
                 <Link href="/home" className={styles.sidebarButton}>Connection</Link>
+                <div className={styles.logoSection}></div>
             </div>
             <div className={styles.content}>
                 {journalEntries.map((entry, index) => (

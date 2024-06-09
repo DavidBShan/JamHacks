@@ -2,11 +2,11 @@ import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
 import React, { useRef, useState, useEffect } from 'react';
 import { useUser } from "@auth0/nextjs-auth0/client";
-import Modal from './Modal'; // Import the Modal component
+import Modal from './Modal'; 
 
 const Graph = ({ data, onNodeClick, onEdgeClick }) => {
     const container = useRef(null);
-    const [isModalOpen, setModalOpen] = useState(false); // State to control modal visibility
+    const [isModalOpen, setModalOpen] = useState(false);
     const { user } = useUser();
     const user_name = user ? user.name : "Guest";
     const user_picture = user ? user.picture : "/default-profile.png";
@@ -33,16 +33,16 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
             return;
         }
 
-        const nodeMap = {}; // Map to store node name to ID mapping
+        const nodeMap = {}; 
         const nodes = new DataSet(data.nodes.map((node, index) => {
-            const nodeId = `node_${index}`; // Generate unique ID for node
-            nodeMap[node.name] = nodeId; // Store mapping between node name and ID
+            const nodeId = `node_${index}`; 
+            nodeMap[node.name] = nodeId; 
             return {
                 id: nodeId,
                 label: node.name,
-                shape: 'circularImage', // Use circular image shape
-                image: 'https://cdn-icons-png.freepik.com/512/4323/4323020.png', // Set the image for the node
-                size: 30 + (connections[node.name] || 0) * 2 // Adjust size based on connections
+                shape: 'circularImage', 
+                image: 'https://cdn-icons-png.freepik.com/512/4323/4323020.png', 
+                size: 30 + (connections[node.name] || 0) * 2 
             };
         }));
 
