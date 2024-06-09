@@ -93,7 +93,7 @@ export default function Home() {
                     </Link>
                 </div>  
                 <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
-                <Link href="/home" className={styles.sidebarButton}>Connection</Link>
+                <Link href="/home" className={styles.sidebarButtonMain}>Connection</Link>
             </div>
             <div className={styles.graphContainer}>
                 <h2 className={styles.graphTitle}>Graph View</h2>

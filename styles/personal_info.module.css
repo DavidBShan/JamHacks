@@ -16,17 +16,15 @@
 .usernameSection {
     border-radius: 12px;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 120px;
     padding: 10px;
     background-color: #4f4f4f;
     margin-bottom: 10px;
     text-align: center;
     color: white;
-    font-weight: bold;  
+    font-weight: bold;
 }
 
 .profilePicture {
@@ -40,6 +38,8 @@
     display: flex;
     align-items: center;
     gap: 10px; /* Space between image and text */
+    text-align: center;
+    color: white;
 }
 
 .largeProfilePicture {
@@ -115,6 +115,19 @@
     background-color: white; /* Ensures the background is white */
 }
 
+.sidebarButtonMain {
+    border-radius: 12px;
+    background-color: #65387b;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+
 .logoSection {
     border-radius: 12px;
     background-color: #161719; /* Fallback color */
@@ -133,4 +146,8 @@
     text-align: center;
     color: white;
     font-weight: bold;
+}
+
+.sidebarButton:hover {
+    background-color: #b389ff;
 }

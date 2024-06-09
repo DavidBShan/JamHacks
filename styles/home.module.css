@@ -26,6 +26,18 @@
     cursor: pointer;
 }
 
+.sidebarButtonMain {
+    border-radius: 12px;
+    background-color: #65387b;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
 
 .usernameSection {
     border-radius: 12px;
@@ -34,7 +46,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background-color: #c689ff;
+    background-color: #4f4f4f;
     margin-bottom: 10px;
     text-align: center;
     color: white;

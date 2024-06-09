@@ -64,7 +64,7 @@ export default function Home() {
                     <span>{userName}</span>
                     </Link>
                  
-                <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
+                <Link href="/journal" className={styles.sidebarButtonMain}>Journal</Link>
                 <Link href="/home" className={styles.sidebarButton}>Connection</Link>   
             </div>
             <div className={styles.content}>
@@ -80,6 +80,7 @@ export default function Home() {
                 <div className={styles.newEntryContainer}>
                     <div className={styles.newEntry}>
                         <h2 className={styles.journalEntryTopTitle}>Start Journaling</h2>
+                        <h2 className = {styles.journalTopParagraph}>Type on your keyboard a journal entry with the person's first and last name mentioned. You can add pictures as well!</h2>
                         <input
                             type="date"
                             name="date"
