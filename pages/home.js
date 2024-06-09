@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Graph from '../components/Graph';
 import axios from 'axios';
 import styles from '../styles/home.module.css';
@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 export default function Home() {
     const [graphData, setGraphData] = useState({ nodes: [], relationships: [] });
+    const audioRef = useRef(null); // Ref to the currently playing audio element
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,8 +69,16 @@ export default function Home() {
         // Create a URL for the Blob
         const url = URL.createObjectURL(blob);
 
+        // Pause the currently playing audio, if any
+        if (audioRef.current) {
+            audioRef.current.pause();
+        }
+
         // Create an <audio> element
         const audio = new Audio(url);
+
+        // Set the audio element to the audioRef
+        audioRef.current = audio;
 
         // Play the audio
         audio.play();
@@ -90,9 +99,9 @@ export default function Home() {
                     <img src={user_picture} alt="Profile" className={styles.profilePicture} />
                     <span>{user_name}</span>
                 </div>
-                <Link href = "/home" className={styles.sidebarButton}>Connection</Link>
-                <Link href = "/personal_info" className={styles.sidebarButton}>Personal Info</Link>
-                <Link href = "/journal" className={styles.sidebarButton}>Journal</Link>
+                <Link href="/home" className={styles.sidebarButton}>Connection</Link>
+                <Link href="/personal_info" className={styles.sidebarButton}>Personal Info</Link>
+                <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
             </div>
             <div className={styles.graphContainer}>
                 <h2 className={styles.graphTitle}>Graph View</h2>
