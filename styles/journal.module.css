@@ -14,13 +14,11 @@
 }
 
 .usernameSection span {
-
     flex-grow: 1;
     /* This makes the username take up remaining space */
 }
 
 .profilePicture {
-
     width: 30px;
     /* Adjust the size as needed */
     height: 30px;
@@ -31,16 +29,12 @@
 }
 
 .usernameSection {
-
     background-color: #c689ff;
     margin-bottom: 10px;
     text-align: center;
     color: white;
     font-weight: bold;
 }
-
-
-
 
 .journalEntry {
     margin-bottom: 20px;
@@ -105,10 +99,7 @@
     border-radius: 20px;
     padding: 20px;
     margin-top: auto;
-
 }
-
-
 
 .journalEntryTopTitle {
     color: whitesmoke;
@@ -132,7 +123,6 @@
     text-align: left;
     cursor: pointer;
 }
-
 
 .newEntry {
     display: flex;
@@ -180,14 +170,17 @@
     background-color: #3e3e3e;
 }
 
-
 .sidebar {
     background-color: #161719;
     padding: 20px;
     width: 260px;
-    height: 1000px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .usernameSection {
@@ -205,23 +198,28 @@
 }
 
 .profilePicture {
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
+    width: 50px;
+    /* Adjust as needed */
+    height: 50px;
+    /* Adjust as needed */
     border-radius: 50%;
-    margin-bottom: 10px; /* Add some space between the picture and the name */
+    margin-bottom: 10px;
+    /* Add some space between the picture and the name */
 }
 
 .largeProfilePictureContainer {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between image and text */
+    gap: 10px;
+    /* Space between image and text */
 }
 
 .largeProfilePictureContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%; /* Adjust as needed */
+    width: 100%;
+    /* Adjust as needed */
 }
 
 .sidebarButton {
@@ -241,28 +239,35 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Adds space between info sections */
+    gap: 20px;
+    /* Adds space between info sections */
+    margin-left: 260px;
+    /* Adjust based on sidebar width */
 }
 
 .logoSection {
     border-radius: 12px;
-    background-color: #161719; /* Fallback color */
-    background-image: url('/pictures/logoPic.png'); /* Path relative to the public folder */
+    background-color: #161719;
+    /* Fallback color */
+    background-image: url('/pictures/logoPic.png');
+    /* Path relative to the public folder */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* Center items vertically */
     width: 100%;
     height: 120px;
     padding: 10px;
-    margin-bottom: 0px;
+    margin-top: auto;
     text-align: center;
     color: white;
     font-weight: bold;
-    margin-top: 50vh;
 }
 
 .sidebarButton:hover {
