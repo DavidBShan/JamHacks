@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/journal.module.css';
 import axios from 'axios';
 import Link from 'next/link';
@@ -6,15 +6,44 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { Editor } from '@tinymce/tinymce-react';
 
 export default function Home() {
+    const { user, error, isLoading } = useUser();
     const [currentPage, setCurrentPage] = useState('journal');
-    const { user } = useUser();
     const userName = user ? user.name : "Guest";
     const userPicture = user ? user.picture : "/default-profile.png";
     const [journalEntries, setJournalEntries] = useState([
-        { date: '2024-06-04', title: 'First day of journaling', content: 'Example of a journal entry you could write!' }
+        { date: '2024-06-09', title: 'First day of journaling', content: 'Example of a journal entry you could write! When writing your first journal, focus on the name of the person you did it with, specifically their full name. After you write your journal, check out the connections page to see the people you know grow!' }
     ]);
     const [newEntry, setNewEntry] = useState({ date: '', content: '' });
     const [imageDescription, newDescription] = useState('');
+
+    useEffect(() => {
+        if (user) {
+            checkAndAddNode(userName);
+        }
+    }, [userName]);
+
+    const checkAndAddNode = async (userName) => {
+        try {
+            const nodeExists = await axios.post('/api/node-exist', { nodeName: userName });
+            console.log(nodeExists.data.nodeExists);
+            if (!nodeExists.data.nodeExists) {
+                await axios.post('/api/add-node', { nodeName: userName });
+            } else {
+                const nodeData = await axios.post('/api/get-node-data', { nodeName: userName });
+                console.log(nodeData.data);
+                const data = nodeData.data;
+                setAddress(data.address);
+                setEmergencyContact({
+                    name: data.emergencyName,
+                    phone: data.emergencyPhone,
+                    email: data.emergencyEmail,
+                    home: data.emergencyHome,
+                });
+            }
+        } catch (error) {
+            console.error('Error checking or adding node:', error);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

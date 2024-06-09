@@ -13,7 +13,7 @@ function Index() {
     if (error) return <div>{error.message}</div>;
 
     if (user) {
-        router.push("/personal_info"); // Redirect to /journal if user is logged in
+        router.push("/journal"); // Redirect to /journal if user is logged in
         return null; // Render nothing if redirecting
     }
 
