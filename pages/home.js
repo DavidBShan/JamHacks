@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 export default function Home() {
     const [graphData, setGraphData] = useState({ nodes: [], relationships: [] });
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false); // State to track audio playing status
     const audioRef = useRef(null); // Ref to the currently playing audio element
 
     useEffect(() => {
@@ -82,12 +83,14 @@ export default function Home() {
 
         // Play the audio
         audio.play();
+        setIsAudioPlaying(true); // Update state to indicate audio is playing
     };
 
     const stopAudio = () => {
         if (audioRef.current) {
             audioRef.current.pause();
             audioRef.current.currentTime = 0;
+            setIsAudioPlaying(false); // Update state to indicate audio is not playing
         }
     };
 
@@ -109,7 +112,13 @@ export default function Home() {
                 <Link href="/home" className={styles.sidebarButton}>Connection</Link>
                 <Link href="/personal_info" className={styles.sidebarButton}>Personal Info</Link>
                 <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
-                <button className={styles.sidebarButton} onClick={stopAudio}>Stop Audio</button>
+                <button 
+                    className={`${styles.stopButton} ${!isAudioPlaying ? styles.disabledButton : ''}`} 
+                    onClick={stopAudio} 
+                    disabled={!isAudioPlaying}
+                >
+                    Stop Audio
+                </button>
             </div>
             <div className={styles.graphContainer}>
                 <h2 className={styles.graphTitle}>Graph View</h2>

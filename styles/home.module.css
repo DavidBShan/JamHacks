@@ -26,6 +26,24 @@
     cursor: pointer;
 }
 
+.stopButton {
+    border-radius: 12px;
+    background-color: #9d0000;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.disabledButton {
+    background-color: #9d0000; /* Gray background color for disabled button */
+    cursor: not-allowed; /* Change cursor to indicate that the button is not clickable */
+    opacity: 0.6; /* Reduce opacity to visually indicate that the button is disabled */
+}
+
 
 .usernameSection {
     border-radius: 12px;
@@ -49,6 +67,9 @@
 
 
 
+.disabledButton:hover {
+    background-color: #969595; /* Gray background color for disabled button */ /* Reduce opacity to visually indicate that the button is disabled */
+}
 
 .sidebarButton:hover {
     background-color: #b389ff;
@@ -77,6 +98,7 @@
 .graphTitle {
     margin-bottom: 20px;
     font-size: 1.5rem;
+    color: #b19a6c;
     font-weight: bold;
     text-align: center;
     color: whitesmoke
@@ -84,15 +106,20 @@
 
 .logoSection {
     border-radius: 12px;
-    background-color: #161719; /* Fallback color */
-    background-image: url('/pictures/logoPic.png'); /* Path relative to the public folder */
+    background-color: #161719;
+    /* Fallback color */
+    background-image: url('/pictures/logoPic.png');
+    /* Path relative to the public folder */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* Center items vertically */
     width: 100%;
     height: 120px;
     padding: 10px;
@@ -104,16 +131,20 @@
 
 
 .profilePicture {
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
+    width: 50px;
+    /* Adjust as needed */
+    height: 50px;
+    /* Adjust as needed */
     border-radius: 50%;
-    margin-bottom: 10px; /* Add some space between the picture and the name */
+    margin-bottom: 10px;
+    /* Add some space between the picture and the name */
 }
 
 .largeProfilePictureContainer {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between image and text */
+    gap: 10px;
+    /* Space between image and text */
 }
 
 .largeProfilePicture {
@@ -125,9 +156,12 @@
 .usernameSection {
     border-radius: 12px;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* Center items vertically */
     width: 100%;
     height: 120px;
     padding: 10px;
@@ -135,5 +169,5 @@
     margin-bottom: 10px;
     text-align: center;
     color: white;
-    font-weight: bold;  
+    font-weight: bold;
 }

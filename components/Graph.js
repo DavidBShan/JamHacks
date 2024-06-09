@@ -1,12 +1,30 @@
 import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
 import React, { useRef, useEffect } from 'react';
-
-// Import Font Awesome to ensure it is available globally
-import '@fortawesome/fontawesome-free/css/all.css';
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const Graph = ({ data, onNodeClick, onEdgeClick }) => {
     const container = useRef(null);
+    const { user } = useUser();
+    const user_name = user ? user.name : "Guest";
+    const user_picture = user ? user.picture : "/default-profile.png";
+
+    const countConnections = (data) => {
+        const connectionCounts = {};
+        data.relationships.forEach((rel) => {
+            if (!connectionCounts[rel.from]) {
+                connectionCounts[rel.from] = 0;
+            }
+            if (!connectionCounts[rel.to]) {
+                connectionCounts[rel.to] = 0;
+            }
+            connectionCounts[rel.from] += 1;
+            connectionCounts[rel.to] += 1;
+        });
+        return connectionCounts;
+    };
+
+    const connections = countConnections(data);
 
     useEffect(() => {
         if (!data || !data.nodes || !data.relationships) {
@@ -17,7 +35,13 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         const nodes = new DataSet(data.nodes.map((node, index) => {
             const nodeId = `node_${index}`; // Generate unique ID for node
             nodeMap[node.name] = nodeId; // Store mapping between node name and ID
-            return { id: nodeId, label: node.name };
+            return {
+                id: nodeId,
+                label: node.name,
+                shape: 'circularImage', // Use circular image shape
+                image: 'https://cdn-icons-png.freepik.com/512/4323/4323020.png', // Set the image for the node
+                size: 30 + (connections[node.name] || 0) * 2 // Adjust size based on connections
+            };
         }));
 
         const edges = new DataSet(data.relationships.map((rel) => ({
@@ -28,21 +52,48 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
 
         const networkData = { nodes, edges };
         const options = {
+            interaction: {
+                navigationButtons: true, // Enable navigation buttons
+                keyboard: true, // Enable keyboard controls
+            },
             nodes: {
-                shape: "icon",
-                icon: {
-                    face: "'Font Awesome 5 Free'",
-                    weight: "900", // Font Awesome 5 requires a weight of 900 (bold)
-                    code: "\uf183", // Unicode for the 'person' icon
-                    size: 50,
-                    color: "#f0a30a",
+                borderWidth: 2,
+                borderWidthSelected: 4,
+                color: {
+                    border: '#2B7CE9',
+                    background: '#D2E5FF',
+                    highlight: {
+                        border: '#2B7CE9',
+                        background: '#D2E5FF'
+                    },
+                    hover: {
+                        border: '#2B7CE9',
+                        background: '#FFFF00' // Change background color on hover
+                    }
                 },
                 font: {
-                    color: 'white' // Set the label color to white
+                    color: 'white', // Set the label color to white
+                    size: 14, // px
+                    face: 'arial',
+                    background: 'none',
+                    strokeWidth: 0, // px
+                    strokeColor: '#ffffff'
                 }
             },
+            physics: {
+                forceAtlas2Based: {
+                    gravitationalConstant: -26,
+                    centralGravity: 0.005,
+                    springLength: 230,
+                    springConstant: 0.08,
+                },
+                maxVelocity: 16,
+                solver: "forceAtlas2Based",
+                timestep: 0.35,
+                stabilization: { iterations: 150 },
+            },
             edges: {
-                color: '#00ff00' // Green color for edges
+                color: '#03c6fc' // Green color for edges
             }
         };
 
@@ -67,7 +118,17 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
         });
     }, [data, onNodeClick, onEdgeClick]);
 
-    return <div ref={container} style={{ height: '700px' }} />;
+    return (
+        <div>
+            <div style={{ position: 'absolute', top: '50px', right: '50px', background: 'rgba(255, 255, 255, 0.7)', padding: '10px', borderRadius: '5px' }}>
+                <h1>Instructions</h1>
+                <p>Press ] or [ for zooming</p>
+                <p>Press UP/DOWN/LEFT/RIGHT to pan frame</p>
+                <p>Click on relationship lines to listen for memories</p>
+            </div>
+            <div ref={container} style={{ height: 'calc(100vh - 120px)', width: 'calc(100% - 40px)', marginTop: '0px', marginLeft: '20px', marginBottom: '50px' }} />
+        </div>
+    );
 };
 
 export default Graph;
