@@ -50,6 +50,11 @@ export default function UserProfile() {
         setIsEditingEmergencyContact(true);
     };
 
+    const capitalizeWords = (str) => {
+        if (!str) return ''; // Handle cases where str is undefined or empty
+        return str.replace(/([A-Z])/g, ' $1').replace(/^./, str[0].toUpperCase()).trim();
+    };
+
     const handleSaveEmergencyContactClick = async () => {
         setIsEditingEmergencyContact(false);
         try {
@@ -70,8 +75,8 @@ export default function UserProfile() {
     const checkAndAddNode = async (userName) => {
         try {
             console.log(username); // Log the username to the console
-            console.log(username.replace(/([A-Z])/g, ' $1').trim());
-            const nodeData = await axios.post(`/api/get-node-data`, {nodeName: userName.replace(/([A-Z])/g, ' $1').trim()});
+            console.log(capitalizeWords(userName));
+            const nodeData = await axios.post(`/api/get-node-data`, {nodeName: capitalizeWords(userName)});
             console.log(nodeData.data);
             const data = nodeData.data;
             setAddress(data.address);
