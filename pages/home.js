@@ -108,13 +108,6 @@ export default function Home() {
                 </Link>
                 <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
                 <Link href="/home" className={styles.sidebarButtonMain}>Connection</Link>
-                <button 
-                    className={`${styles.stopButton} ${!isAudioPlaying ? styles.disabledButton : ''}`} 
-                    onClick={stopAudio} 
-                    disabled={!isAudioPlaying}
-                >
-                    Stop Audio
-                </button>
                 <div className={styles.logoSection}>
                 </div>
             </div>

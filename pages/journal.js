@@ -10,17 +10,25 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState('journal');
     const userName = user ? user.name : "Guest";
     const userPicture = user ? user.picture : "/default-profile.png";
-    const [journalEntries, setJournalEntries] = useState([
-        { date: '2024-06-09', title: 'First day of journaling', content: 'Example of a journal entry you could write! When writing your first journal, focus on the name of the person you did it with, specifically their full name. After you write your journal, check out the connections page to see the people you know grow!' }
-    ]);
+    const [journalEntries, setJournalEntries] = useState([]);
     const [newEntry, setNewEntry] = useState({ date: '', content: '' });
-    const [imageDescription, newDescription] = useState('');
+    const [imageDescription, setImageDescription] = useState('');
 
     useEffect(() => {
         if (user) {
             checkAndAddNode(userName);
+            fetchJournalEntries(userName);  // Fetch journal entries when the user is available
         }
-    }, [userName]);
+    }, [user]);
+
+    const fetchJournalEntries = async (userName) => {
+        try {
+            const response = await axios.post('/api/get-journal', { nodeName: userName });
+            setJournalEntries(response.data);
+        } catch (error) {
+            console.error('Error fetching journal entries:', error);
+        }
+    };
 
     const checkAndAddNode = async (userName) => {
         try {
@@ -58,6 +66,7 @@ export default function Home() {
             try {
                 const cleanedContent = content.replace(/<img[^>]+src="data:image\/[^;]+;base64[^"]*"[^>]*>/g, '');
                 console.log(`on ${date} ${cleanedContent}` + `The user also attached an image that is about ${imageDescription}`);
+                await axios.post('/api/add-journal', { nodeName: userName, date, content });
                 const res = await axios.post('/api/summarize', { prompt: `on ${date} ${cleanedContent}` + `The user also attached an image that is about ${imageDescription}` });
                 const jsonArray = JSON.parse(res.data.data);
 
@@ -148,7 +157,7 @@ export default function Home() {
 
                                             try {
                                                 const res = await axios.post('/api/imagizer', { prompt: base64 });
-                                                newDescription(res.data.data);
+                                                setImageDescription(res.data.data);
                                             } catch (error) {
                                                 console.error("Error during image upload and processing:", error);
                                             }

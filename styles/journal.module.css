@@ -184,7 +184,7 @@
 .sidebar {
     background-color: #161719;
     padding: 20px;
-    width: 300px;
+    width: 260px;
     height: 1000px;
     display: flex;
     flex-direction: column;
@@ -247,7 +247,7 @@
 .logoSection {
     border-radius: 12px;
     background-color: #161719; /* Fallback color */
-    background-image: url('../public/pictures/logoPic.png'); /* Path relative to the public folder */
+    background-image: url('/pictures/logoPic.png'); /* Path relative to the public folder */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
