@@ -1,10 +1,12 @@
 import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Modal from './Modal'; // Import the Modal component
 
 const Graph = ({ data, onNodeClick, onEdgeClick }) => {
     const container = useRef(null);
+    const [isModalOpen, setModalOpen] = useState(false); // State to control modal visibility
     const { user } = useUser();
     const user_name = user ? user.name : "Guest";
     const user_picture = user ? user.picture : "/default-profile.png";
@@ -120,12 +122,32 @@ const Graph = ({ data, onNodeClick, onEdgeClick }) => {
 
     return (
         <div>
-            <div style={{ position: 'absolute', top: '50px', right: '50px', background: 'rgba(255, 255, 255, 0.7)', padding: '10px', borderRadius: '5px' }}>
+            <button 
+                style={{ 
+                    position: 'absolute', 
+                    top: '10px', 
+                    right: '10px', 
+                    zIndex: 1000, 
+                    backgroundColor: '#b19a6c', // Blue background
+                    color: 'white', // White text
+                    padding: '10px 20px', // Padding
+                    border: 'none', // Remove border
+                    borderRadius: '5px', // Rounded corners
+                    cursor: 'pointer', // Pointer cursor on hover
+                    fontWeight: 'bold' // Bold text
+                }} 
+                onClick={() => setModalOpen(true)}
+            >
+                Show Instructions
+            </button>
+
+            <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
                 <h1>Instructions</h1>
                 <p>Press ] or [ for zooming</p>
                 <p>Press UP/DOWN/LEFT/RIGHT to pan frame</p>
                 <p>Click on relationship lines to listen for memories</p>
-            </div>
+            </Modal>
+
             <div ref={container} style={{ height: 'calc(100vh - 120px)', width: 'calc(100% - 40px)', marginTop: '0px', marginLeft: '20px', marginBottom: '50px' }} />
         </div>
     );
