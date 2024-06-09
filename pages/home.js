@@ -84,6 +84,13 @@ export default function Home() {
         audio.play();
     };
 
+    const stopAudio = () => {
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+        }
+    };
+
     const { user, error, isLoading } = useUser();
     const user_name = user ? user.name : "Guest"; // Fallback to "Guest" if user is not defined
     const user_picture = user ? user.picture : "/default-profile.png"; // Fallback to a default profile picture
@@ -102,6 +109,7 @@ export default function Home() {
                 <Link href="/home" className={styles.sidebarButton}>Connection</Link>
                 <Link href="/personal_info" className={styles.sidebarButton}>Personal Info</Link>
                 <Link href="/journal" className={styles.sidebarButton}>Journal</Link>
+                <button className={styles.sidebarButton} onClick={stopAudio}>Stop Audio</button>
             </div>
             <div className={styles.graphContainer}>
                 <h2 className={styles.graphTitle}>Graph View</h2>
